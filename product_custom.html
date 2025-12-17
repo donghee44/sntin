@@ -23,17 +23,19 @@
   }
 
   /* 로고 크게 + 좌측 배치 */
-  .brand{ display:flex; align-items:center; gap:14px; }
+  .brand{ display:flex; align-items:center; gap:0; }
   .brand img{ height:52px; width:auto; display:block; }
   .brand .txt{ display:flex; flex-direction:column; line-height:1.1; }
   .brand .txt .name{ font-weight:900; letter-spacing:1px; color:#0b2c4d; font-size:18px; }
-  .brand .txt .tag{ font-weight:600; color:#6b7a8a; margin-top:4px; font-size:13px; }
+  .brand .txt .tag{ font-weight:600; color:#6b7a8a; font-size:13px; }
 
   /* ===== Main menu + dropdown ===== */
   nav.main-nav{ position:relative; }
   ul.menu{ list-style:none; display:flex; gap:10px; margin:0; padding:0; align-items:center; }
   ul.menu > li{ position:relative; padding:10px 14px; font-weight:800; cursor:pointer; }
-  ul.menu > li > a{ display:block; padding:8px 6px; }
+  ul.menu > li > a{ display:block; padding:8px 6px; 
+    position:relative;
+  }
   ul.menu > li:hover > a{ color:#0b2c4d; }
 
   .dropdown{
@@ -109,7 +111,7 @@
   .card{ background:#fff; border:1px solid #e9eef3; border-radius:16px; padding:22px; box-shadow:0 8px 22px rgba(0,0,0,0.05); }
   .card img{ width:100%; border-radius:12px; }
 
-  .btn{ display:inline-block; padding:12px 18px; border-radius:6px; background:#0b2c4d; color:#fff; font-weight:900; margin-top:12px; }
+  .btn{ display:inline-block; padding:12px 18px; border-radius:6px; background:#0b2c4d; color:#fff; font-weight:900; }
   .btn:hover{ background:#071f35; }
 
   /* ===== Duckwoo-style home bottom section ===== */
@@ -167,14 +169,13 @@
   }
   .contact-card h3{ margin:0 0 10px; font-size:20px; }
   .contact-card .tel{ font-size:34px; font-weight:900; letter-spacing:0.5px; }
-  .contact-card .label{ font-weight:900; margin-top:14px; }
-  .contact-card .val{ opacity:0.95; margin-top:4px; }
+  .contact-card .label{ font-weight:900; }
+  .contact-card .val{ opacity:0.95; }
   .contact-card .phone-ico{
     font-size:48px; opacity:0.85; align-self:center;
   }
 
   .inquiry-banner{
-    margin-top:50px;
     height:240px;
     background:url('img/inquiry_bg.jpg') center/cover no-repeat;
     position:relative;
@@ -192,7 +193,7 @@
   }
   .inquiry-banner h2{ margin:0; font-size:40px; letter-spacing:0.5px; }
   .inquiry-banner p{ margin:10px 0 0; opacity:0.95; }
-  .inquiry-banner a.btn{ margin-top:18px; background:#0b2c4d; border-radius:0; }
+  .inquiry-banner a.btn{ background:#0b2c4d; border-radius:0; }
 
   /* ===== Footer ===== */
   footer.site-footer{
@@ -223,6 +224,69 @@
     .two-col{ grid-template-columns:1fr; }
     ul.menu{ overflow:auto; }
   }
+
+/* ===== Duckwoo-style hover indicator ===== */
+  ul.menu > li > a{
+    display:block;
+    padding:10px 8px;
+    border-radius:8px;
+    transition: color .15s ease, background .15s ease;
+  }
+  ul.menu > li:hover > a{
+    color:#0b2c4d;
+    background:#f2f6fa;
+  }
+  ul.menu > li.has-drop:hover > a::after{
+    content:'';
+    position:absolute;
+    left:8px;
+    right:8px;
+    bottom:-6px;
+    height:2px;
+    background:#0b2c4d;
+    border-radius:999px;
+  }
+
+  /* ===== Dropdown: show only 해당 메뉴 하위 ===== */
+  ul.menu > li{ position:relative; }
+  .dropdown.small{
+    position:absolute;
+    left:0;
+    transform:none;
+    top:54px;
+    width:max-content;
+    min-width:170px;
+    max-width:260px;
+    background:#fff;
+    border:1px solid #e9eef3;
+    border-radius:10px;
+    box-shadow:0 14px 28px rgba(0,0,0,0.12);
+    padding:8px 8px;
+    display:none;
+  }
+  ul.menu > li:hover .dropdown.small{ display:block; }
+  .dropdown.small .drop-col a{
+    display:block;
+    padding:8px 10px;
+    border-radius:8px;
+    font-size:13px;
+    color:#444;
+    white-space:nowrap;
+  }
+  .dropdown.small .drop-col a:hover{
+    background:#f2f6fa;
+    color:#0b2c4d;
+  }
+
+  /* ===== Sub-visual visibility fix ===== */
+  .sub-visual{
+    background-color:#222; /* fallback when image is missing */
+  }
+  .sub-visual h1{
+    color:#fff;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+  }
+
 </style>
 
 </head>
@@ -232,68 +296,56 @@
   <div class="header-inner">
     <a class="brand" href="index.html">
       <img src="img/ci_logo.png" alt="SNT CI 로고" onerror="this.style.display='none'">
-      <span class="txt">
-        <span class="name">SNT</span>
-        <span class="tag">Speed & Technology</span>
-      </span>
     </a>
-
     <nav class="main-nav">
       <ul class="menu">
-        <li>
-          <a href="about.html">회사소개</a>
-          <div class="dropdown">
-            <div class="drop-grid">
-              <div class="drop-col">
-                <h4>회사소개</h4>
-                <a href="about.html#tab1">인사말</a>
-                <a href="about.html#tab2">CI</a>
-                <a href="about.html#tab3">조직도</a>
-                <a href="about.html#tab4">경영목표</a>
-                <a href="about.html#tab5">회사연혁</a>
-                <a href="about.html#tab6">특허·인증서</a>
-                <a href="about.html#tab7">오시는 길</a>
-              </div>
-              <div class="drop-col">
-                <h4>사업분야</h4>
-                <a href="business.html#tab1">산업 자동화 시스템</a>
-                <a href="business.html#tab2">정밀 기계 솔루션</a>
-                <a href="business.html#tab3">맞춤 장비 개발</a>
-              </div>
-              <div class="drop-col">
-                <h4>제품소개</h4>
-                <a href="products.html#tab1">제품 목록</a>
-                <a href="products.html#tab2">UP TYPE</a>
-                <a href="products.html#tab3">SML150</a>
-                <a href="products.html#tab4">Custom</a>
-                <a href="products.html#tab5">자료 다운로드</a>
-              </div>
-              <div class="drop-col">
-                <h4>연구개발</h4>
-                <a href="rnd.html#tab1">연구개발 현황</a>
-                <a href="rnd.html#tab2">기술 보유 현황</a>
-              </div>
-              <div class="drop-col">
-                <h4>고객센터</h4>
-                <a href="support.html#tab1">공지사항</a>
-                <a href="support.html#tab2">온라인 문의</a>
-                <a href="support.html#tab3">제품 카탈로그</a>
-                <a href="support.html#tab4">설치 및 A/S</a>
-              </div>
-            </div>
-          </div>
-        </li>
-
-        <li><a href="business.html">사업분야</a></li>
-        <li><a href="products.html">제품소개</a></li>
-        <li><a href="rnd.html">연구개발</a></li>
-        <li><a href="support.html">고객센터</a></li>
+        <li class="has-drop"><a href="about.html">회사소개</a><div class="dropdown small">
+  <div class="drop-col">
+    <a href="about.html#tab1">인사말</a>
+    <a href="about.html#tab2">CI</a>
+    <a href="about.html#tab3">조직도</a>
+    <a href="about.html#tab4">경영목표</a>
+    <a href="about.html#tab5">회사연혁</a>
+    <a href="about.html#tab6">특허·인증서</a>
+    <a href="about.html#tab7">오시는 길</a>
+  </div>
+</div></li>
+        <li class="has-drop"><a href="business.html">사업분야</a><div class="dropdown small">
+  <div class="drop-col">
+    <a href="business.html#tab1">클린룸 시스템</a>
+    <a href="business.html#tab2">항온항습 시스템</a>
+    <a href="business.html#tab3">제습 시스템</a>
+    <a href="business.html#tab4">냉동 공조 시스템</a>
+  </div>
+</div></li>
+        <li class="has-drop"><a href="products.html">제품소개</a><div class="dropdown small">
+  <div class="drop-col">
+    <a href="products.html#tab1">공기조화기(AHU)</a>
+    <a href="products.html#tab2">항온항습기</a>
+    <a href="products.html#tab3">건식제습기</a>
+    <a href="products.html#tab4">CR장비</a>
+  </div>
+</div></li>
+        <li class="has-drop"><a href="rnd.html">연구개발</a><div class="dropdown small">
+  <div class="drop-col">
+    <a href="rnd.html#tab1">연구개발 현황</a>
+    <a href="rnd.html#tab2">기술 보유 현황</a>
+  </div>
+</div></li>
+        <li class="has-drop"><a href="support.html">고객센터</a><div class="dropdown small">
+  <div class="drop-col">
+    <a href="support.html#tab1">공지사항</a>
+    <a href="support.html#tab2">온라인 문의</a>
+    <a href="support.html#tab3">제품 카탈로그</a>
+    <a href="support.html#tab4">설치 및 A/S</a>
+  </div>
+</div></li>
       </ul>
     </nav>
   </div>
 </header>
 
-<div class="sub-visual" style="background-image:url('img/sub_products.jpg');">
+<div class="sub-visual" style="background-image:url('img/hero_bg.jpg');">
   <h1>제품소개</h1>
 </div>
 <div class="wrap">
@@ -306,11 +358,11 @@
     </div>
     <h2>Custom Solution</h2>
     <p>고객의 생산 공정·설치 환경·요구 사양에 맞춰 설계부터 제작, 납품까지 맞춤 대응하는 솔루션입니다.</p>
-    <h3 style="color:#0b2c4d; margin-top:28px;">주요 특징</h3>
+    <h3 style="color:#0b2c4d; ">주요 특징</h3>
     <ul style="line-height:1.9;"><li>맞춤 설계 및 기술 검토</li><li>현장 환경에 맞춘 제작</li><li>설치 및 시운전 대응</li><li>One-stop 기술 지원</li></ul>
-    <h3 style="color:#0b2c4d; margin-top:28px;">적용 분야</h3>
+    <h3 style="color:#0b2c4d; ">적용 분야</h3>
     <p>고객 맞춤 공정 / 특수 설비 / 라인 개선 프로젝트</p>
-    <div style="margin-top:26px;">
+    <div style="">
       <a class="btn" href="pdf/SNT_catalog.pdf" download>📄 카탈로그(PDF) 다운로드</a>
       <a class="btn" href="pdf/images.zip" style="margin-left:10px; background:#163f6b;">🖼️ 제품 이미지 ZIP</a>
     </div>
@@ -323,19 +375,12 @@
       <img src="img/ci_logo_white.png" alt="SNT 로고" onerror="this.style.display='none'">
     </div>
     <div class="footer-text">
-      <div>
-        <b>대표</b> : 임은석 |
-        <b>주소</b> : 경기도 화성시 마도면 청원산단5길 26 |
-        <b>사업자등록번호</b> : 134-86-70313
-      </div>
-      <div>
-        <b>Tel</b> : 031-508-0252 |
-        <b>Fax</b> : 031-508-0255 |
-        <b>E-mail</b> : sntin2010@naver.com
-      </div>
+      <div><b>대표</b> : 임은석 &nbsp; | &nbsp; <b>주소</b> : 경기도 화성시 마도면 청원산단5길 26 &nbsp; | &nbsp; <b>사업자등록번호</b> : 134-86-70313</div>
+      <div><b>Tel</b> : 031-508-0252 &nbsp; | &nbsp; <b>Fax</b> : 031-508-0255 &nbsp; | &nbsp; <b>E-mail</b> : sntin2010@naver.com</div>
       <div>Copyright © SNT Co., Ltd. All rights reserved.</div>
     </div>
   </div>
+  <div class="footer-copy">관리자</div>
 </footer>
 
 </body>
