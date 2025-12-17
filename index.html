@@ -338,6 +338,17 @@
   overflow:hidden;
   min-height:2.8em;
 }
+
+/* ===== Home bottom quick links ===== */
+  .home-links{ padding:56px 0; background:#f6f8fb; }
+  .home-links .container{ width:min(1120px, calc(100% - 32px)); margin:0 auto; }
+  .home-links h2{ margin:0 0 18px; font-size:22px; }
+  .links-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap:14px; }
+  .link-card{ display:block; padding:20px 18px; border-radius:14px; background:#fff; border:1px solid #e9eef3; text-decoration:none; }
+  .link-card .title{ font-weight:800; color:#0b2c4d; margin-bottom:8px; }
+  .link-card .desc{ color:#555; line-height:1.5; }
+  .link-card:hover{ background:#f2f6fa; }
+  @media (max-width:768px){ .links-grid{ grid-template-columns:1fr; } }
 </style>
 </head>
 <body>
@@ -427,6 +438,26 @@
 </div>
 
 
+
+<section class="home-links" id="home-links">
+  <div class="container">
+    <h2>바로가기</h2>
+    <div class="links-grid">
+      <a class="link-card" href="about.html#tab7">
+        <div class="title">오시는 길</div>
+        <div class="desc">회사 위치 및 연락처 안내</div>
+      </a>
+      <a class="link-card" href="support.html#tab2">
+        <div class="title">온라인 문의</div>
+        <div class="desc">빠른 상담 및 문의 접수</div>
+      </a>
+      <a class="link-card" href="support.html#tab1">
+        <div class="title">고객센터</div>
+        <div class="desc">공지사항 및 A/S 안내</div>
+      </a>
+    </div>
+  </div>
+</section>
 
 <footer class="site-footer">
 <div class="footer-inner">
