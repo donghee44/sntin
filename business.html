@@ -287,6 +287,44 @@
     text-shadow: 0 2px 10px rgba(0,0,0,0.6);
   }
 
+
+
+  /* ===== Two-line descriptions (cards) ===== */
+  .card p{
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+    min-height:2.8em;
+  }
+
+
+
+  /* ===== Sub-visual contrast (brighter title) ===== */
+  .sub-visual{ position:relative; }
+  .sub-visual::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,0.25);
+  }
+  .sub-visual .inner, .sub-visual h1{ position:relative; z-index:1; }
+  .sub-visual h1{ color:#ffffff; text-shadow:0 2px 14px rgba(0,0,0,0.55); }
+
+
+
+  /* ===== Products page image consistency ===== */
+  .two-col img{
+    width:100%;
+    height:320px;
+    object-fit:contain;
+    background:#f4f6f8;
+    border-radius:12px;
+  }
+  @media (max-width:768px){
+    .two-col img{ height:220px; }
+  }
+
 </style>
 
 </head>
@@ -359,49 +397,69 @@
 <div class="wrap">
 <div id="tab1" class="content-box active">
   <div class="panel">
-    <h2>클린룸 시스템</h2>
-    <p>청정 환경이 필요한 생산공정에 최적화된 클린룸 공조·제어 솔루션을 제공합니다.</p>
-    <ul>
-      <li>공정 요구 사양 기반 설계</li>
-      <li>청정도/압력/온습도 제어</li>
-      <li>설치·시운전·유지보수 지원</li>
-    </ul>
+    <div class="two-col">
+      <img src="img/business_cleanroom.png" alt="클린룸 시스템" onerror="this.style.display='none'">
+      <div>
+        <h2>클린룸 시스템</h2>
+        <p>청정 환경이 필요한 생산공정에 최적화된 클린룸 공조·제어 솔루션을 제공합니다.</p>
+        <ul>
+          <li>공정 요구 사양 기반 설계</li>
+<li>청정도/압력/온습도 제어</li>
+<li>설치·시운전·유지보수 지원</li>
+        </ul>
+      </div>
+    </div>
   </div>
 </div>
 
 <div id="tab2" class="content-box">
   <div class="panel">
-    <h2>항온항습 시스템</h2>
-    <p>정밀한 온도·습도 제어가 필요한 환경에 맞춘 항온항습 솔루션을 제공합니다.</p>
-    <ul>
-      <li>정밀 제어 기반 안정 운전</li>
-      <li>에너지 효율 고려 설계</li>
-      <li>현장 조건에 따른 맞춤 구성</li>
-    </ul>
+    <div class="two-col">
+      <img src="img/business_thc.png" alt="항온항습 시스템" onerror="this.style.display='none'">
+      <div>
+        <h2>항온항습 시스템</h2>
+        <p>정밀 온도·습도 제어가 필요한 환경에 맞춘 항온항습 솔루션을 제공합니다.</p>
+        <ul>
+          <li>정밀 제어 기반 안정 운전</li>
+<li>에너지 효율 고려 설계</li>
+<li>현장 조건에 따른 맞춤 구성</li>
+        </ul>
+      </div>
+    </div>
   </div>
 </div>
 
 <div id="tab3" class="content-box">
   <div class="panel">
-    <h2>제습 시스템</h2>
-    <p>공정 요구에 맞춘 제습 솔루션으로 품질 안정과 불량률 감소에 기여합니다.</p>
-    <ul>
-      <li>저노점 제습 대응</li>
-      <li>라인/창고/설비실 적용</li>
-      <li>운전 데이터 기반 관리</li>
-    </ul>
+    <div class="two-col">
+      <img src="img/business_dehumid.png" alt="제습 시스템" onerror="this.style.display='none'">
+      <div>
+        <h2>제습 시스템</h2>
+        <p>저노점 제습 등 공정 요구에 맞춘 제습 솔루션으로 품질 안정에 기여합니다.</p>
+        <ul>
+          <li>저노점 제습 대응</li>
+<li>라인/창고/설비실 적용</li>
+<li>운전 데이터 기반 관리</li>
+        </ul>
+      </div>
+    </div>
   </div>
 </div>
 
 <div id="tab4" class="content-box">
   <div class="panel">
-    <h2>냉동 공조 시스템</h2>
-    <p>현장 조건에 맞춘 냉동·공조 설비 구성으로 안정적인 환경을 구축합니다.</p>
-    <ul>
-      <li>열부하 기반 장비 선정</li>
-      <li>공조·배관·제어 통합 설계</li>
-      <li>유지보수 편의 고려</li>
-    </ul>
+    <div class="two-col">
+      <img src="img/business_hvac.png" alt="냉동 공조 시스템" onerror="this.style.display='none'">
+      <div>
+        <h2>냉동 공조 시스템</h2>
+        <p>현장 조건에 맞춘 냉동·공조 설비 구성으로 안정적인 환경을 구축합니다.</p>
+        <ul>
+          <li>열부하 기반 장비 선정</li>
+<li>공조·배관·제어 통합 설계</li>
+<li>유지보수 편의 고려</li>
+        </ul>
+      </div>
+    </div>
   </div>
 </div>
 </div>
@@ -438,8 +496,47 @@ document.addEventListener('DOMContentLoaded', initTabs);
       <div>Copyright © SNT Co., Ltd. All rights reserved.</div>
     </div>
   </div>
-  <div class="footer-copy">관리자</div>
+  <div class="footer-copy"></div>
 </footer>
 
+
+<script>
+  function showTab(tabId){
+    document.querySelectorAll('.tab-menu li').forEach(li => {
+      li.classList.toggle('active', li.dataset.tab === tabId);
+    });
+    document.querySelectorAll('.content-box').forEach(box => {
+      box.classList.toggle('active', box.id === tabId);
+    });
+  }
+  function scrollToTop(){
+    // keep user at top even when URL has #tabX
+    window.scrollTo({top:0, left:0, behavior:'instant'});
+  }
+  function tabFromHash(){
+    const hash = (location.hash || '').replace('#','');
+    if(hash && document.getElementById(hash)){
+      showTab(hash);
+      setTimeout(scrollToTop, 0);
+      return;
+    }
+    if(document.getElementById('tab1')) showTab('tab1');
+    setTimeout(scrollToTop, 0);
+  }
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.tab-menu li').forEach(li => {
+      li.addEventListener('click', () => {
+        const tabId = li.dataset.tab;
+        if(tabId){
+          history.replaceState(null, '', '#' + tabId);
+          showTab(tabId);
+        setTimeout(scrollToTop, 0);
+      }
+      });
+    });
+    tabFromHash();
+  });
+  window.addEventListener('hashchange', tabFromHash);
+</script>
 </body>
 </html>

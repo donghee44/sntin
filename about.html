@@ -287,6 +287,30 @@
     text-shadow: 0 2px 10px rgba(0,0,0,0.6);
   }
 
+
+
+  /* ===== Two-line descriptions (cards) ===== */
+  .card p{
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+    min-height:2.8em;
+  }
+
+
+
+  /* ===== Sub-visual contrast (brighter title) ===== */
+  .sub-visual{ position:relative; }
+  .sub-visual::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,0.25);
+  }
+  .sub-visual .inner, .sub-visual h1{ position:relative; z-index:1; }
+  .sub-visual h1{ color:#ffffff; text-shadow:0 2px 14px rgba(0,0,0,0.55); }
+
 </style>
 
 </head>
@@ -425,14 +449,27 @@
     </div>
   </div>
 </div>
-<div id="tab7" class="content-box ">
-  <div class="panel">
+<div id="tab7" class="content-box "><div class="panel">
     <div class="two-col">
       <img src="img/map.jpg" alt="오시는 길" onerror="this.style.display='none'">
       <div>
         <h2>오시는 길</h2>
-        <p>(여기에 회사 주소/지도 링크를 넣어주세요)</p>
-      </div>
+        <p>(여기에 회사 /지도 링크를 넣어주세요)</p>
+<div style="margin-top:16px;">
+  <div style="font-weight:700; margin-bottom:8px;">주소</div>
+  <div style="line-height:1.6;">경기도 화성시 마도면 청원산단5길 26</div>
+</div>
+<div style="margin-top:16px; border-radius:12px; overflow:hidden; border:1px solid #e9eef3;">
+  <iframe
+    title="SNT 위치 지도"
+    src="https://www.google.com/maps?q=경기도%20화성시%20마도면%20청원산단5길%2026&output=embed"
+    width="100%"
+    height="360"
+    style="border:0; display:block;"
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"></iframe>
+</div>
+</div>
     </div>
   </div>
 </div>
@@ -471,8 +508,47 @@ document.addEventListener('DOMContentLoaded', initTabs);
       <div>Copyright © SNT Co., Ltd. All rights reserved.</div>
     </div>
   </div>
-  <div class="footer-copy">관리자</div>
+  <div class="footer-copy"></div>
 </footer>
 
+
+<script>
+  function showTab(tabId){
+    document.querySelectorAll('.tab-menu li').forEach(li => {
+      li.classList.toggle('active', li.dataset.tab === tabId);
+    });
+    document.querySelectorAll('.content-box').forEach(box => {
+      box.classList.toggle('active', box.id === tabId);
+    });
+  }
+  function scrollToTop(){
+    // keep user at top even when URL has #tabX
+    window.scrollTo({top:0, left:0, behavior:'instant'});
+  }
+  function tabFromHash(){
+    const hash = (location.hash || '').replace('#','');
+    if(hash && document.getElementById(hash)){
+      showTab(hash);
+      setTimeout(scrollToTop, 0);
+      return;
+    }
+    if(document.getElementById('tab1')) showTab('tab1');
+    setTimeout(scrollToTop, 0);
+  }
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.tab-menu li').forEach(li => {
+      li.addEventListener('click', () => {
+        const tabId = li.dataset.tab;
+        if(tabId){
+          history.replaceState(null, '', '#' + tabId);
+          showTab(tabId);
+        setTimeout(scrollToTop, 0);
+      }
+      });
+    });
+    tabFromHash();
+  });
+  window.addEventListener('hashchange', tabFromHash);
+</script>
 </body>
 </html>

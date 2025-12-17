@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-
 <html lang="ko">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>SNT | Speed &amp; Technology</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SNT | 제품소개 - Custom Solution</title>
+  
 <style>
   body { margin:0; font-family:'Noto Sans KR', Arial, sans-serif; background:#f5f6f8; color:#222; }
   a { color:inherit; text-decoration:none; }
@@ -288,158 +288,124 @@
   }
 
 
-  /* ===== Product layout helpers ===== */
-  .two-col{
-    display:flex;
-    gap:24px;
-    align-items:flex-start;
-    flex-wrap:wrap;
-  }
-  .two-col img{
-    width:420px;
-    max-width:100%;
-    border-radius:14px;
-    box-shadow:0 10px 26px rgba(0,0,0,0.10);
-    object-fit:cover;
-  }
-  @media (max-width: 900px){
-    .two-col img{ width:100%; }
-  }
-  .card img{
-    width:100%;
-    height:180px;
-    object-fit:cover;
-    border-radius:14px;
+
+  /* ===== Two-line descriptions (cards) ===== */
+  .card p{
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+    min-height:2.8em;
   }
 
 
-/* ===== Product card image consistency ===== */
-  .grid .card img{
-    width:100%;
-    height:220px;
-    object-fit:cover;
-    border-radius:10px;
+
+  /* ===== Sub-visual contrast (brighter title) ===== */
+  .sub-visual{ position:relative; }
+  .sub-visual::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,0.25);
   }
+  .sub-visual .inner, .sub-visual h1{ position:relative; z-index:1; }
+  .sub-visual h1{ color:#ffffff; text-shadow:0 2px 14px rgba(0,0,0,0.55); }
 
-  @media (max-width:768px){
-    .grid .card img{
-      height:180px;
-      object-fit:contain;
-      background:#f4f6f8;
-    }
-  }
-
-
-/* ===== Two-line descriptions (cards) ===== */
-.card p{
-  display:-webkit-box;
-  -webkit-line-clamp:2;
-  -webkit-box-orient:vertical;
-  overflow:hidden;
-  min-height:2.8em;
-}
 </style>
+
 </head>
 <body>
+
 <header class="site-header">
-<div class="header-inner">
-<a class="brand" href="index.html">
-<img alt="SNT CI 로고" onerror="this.style.display='none'" src="img/ci_logo.png"/>
-</a>
-<nav class="main-nav">
-<ul class="menu">
-<li class="has-drop"><a href="about.html">회사소개</a><div class="dropdown small">
-<div class="drop-col">
-<a href="about.html#tab1">인사말</a>
-<a href="about.html#tab2">CI</a>
-<a href="about.html#tab3">조직도</a>
-<a href="about.html#tab4">경영목표</a>
-<a href="about.html#tab5">회사연혁</a>
-<a href="about.html#tab6">특허·인증서</a>
-<a href="about.html#tab7">오시는 길</a>
-</div>
+  <div class="header-inner">
+    <a class="brand" href="index.html">
+      <img src="img/ci_logo.png" alt="SNT CI 로고" onerror="this.style.display='none'">
+    </a>
+    <nav class="main-nav">
+      <ul class="menu">
+        <li class="has-drop"><a href="about.html">회사소개</a><div class="dropdown small">
+  <div class="drop-col">
+    <a href="about.html#tab1">인사말</a>
+    <a href="about.html#tab2">CI</a>
+    <a href="about.html#tab3">조직도</a>
+    <a href="about.html#tab4">경영목표</a>
+    <a href="about.html#tab5">회사연혁</a>
+    <a href="about.html#tab6">특허·인증서</a>
+    <a href="about.html#tab7">오시는 길</a>
+  </div>
 </div></li>
-<li class="has-drop"><a href="business.html">사업분야</a><div class="dropdown small">
-<div class="drop-col">
-<a href="business.html#tab1">클린룸 시스템</a>
-<a href="business.html#tab2">항온항습 시스템</a>
-<a href="business.html#tab3">제습 시스템</a>
-<a href="business.html#tab4">냉동 공조 시스템</a>
-</div>
+        <li class="has-drop"><a href="business.html">사업분야</a><div class="dropdown small">
+  <div class="drop-col">
+    <a href="business.html#tab1">클린룸 시스템</a>
+    <a href="business.html#tab2">항온항습 시스템</a>
+    <a href="business.html#tab3">제습 시스템</a>
+    <a href="business.html#tab4">냉동 공조 시스템</a>
+  </div>
 </div></li>
-<li class="has-drop"><a href="products.html">제품소개</a><div class="dropdown small">
-<div class="drop-col">
-<a href="products.html#tab1">공기조화기(AHU)</a>
-<a href="products.html#tab2">항온항습기</a>
-<a href="products.html#tab3">건식제습기</a>
-<a href="products.html#tab4">CR장비</a>
-</div>
+        <li class="has-drop"><a href="products.html">제품소개</a><div class="dropdown small">
+  <div class="drop-col">
+    <a href="products.html#tab1">공기조화기(AHU)</a>
+    <a href="products.html#tab2">항온항습기</a>
+    <a href="products.html#tab3">건식제습기</a>
+    <a href="products.html#tab4">CR장비</a>
+  </div>
 </div></li>
-<li class="has-drop"><a href="rnd.html">연구개발</a><div class="dropdown small">
-<div class="drop-col">
-<a href="rnd.html#tab1">연구개발 현황</a>
-<a href="rnd.html#tab2">기술 보유 현황</a>
-</div>
+        <li class="has-drop"><a href="rnd.html">연구개발</a><div class="dropdown small">
+  <div class="drop-col">
+    <a href="rnd.html#tab1">연구개발 현황</a>
+    <a href="rnd.html#tab2">기술 보유 현황</a>
+  </div>
 </div></li>
-<li class="has-drop"><a href="support.html">고객센터</a><div class="dropdown small">
-<div class="drop-col">
-<a href="support.html#tab1">공지사항</a>
-<a href="support.html#tab2">온라인 문의</a>
-<a href="support.html#tab3">제품 카탈로그</a>
-<a href="support.html#tab4">설치 및 A/S</a>
-</div>
+        <li class="has-drop"><a href="support.html">고객센터</a><div class="dropdown small">
+  <div class="drop-col">
+    <a href="support.html#tab1">공지사항</a>
+    <a href="support.html#tab2">온라인 문의</a>
+    <a href="support.html#tab3">제품 카탈로그</a>
+    <a href="support.html#tab4">설치 및 A/S</a>
+  </div>
 </div></li>
-</ul>
-</nav>
-</div>
+      </ul>
+    </nav>
+  </div>
 </header>
-<div class="hero"></div>
+
+<div class="sub-visual" style="background-image:url('img/hero_bg.jpg');">
+  <h1>제품소개</h1>
+</div>
 <div class="wrap">
-<div class="panel" style="padding:0; box-shadow:none; background:transparent;">
-<h2 style="margin:0 0 18px; color:#0b2c4d;">주요 제품</h2>
-<div class="grid">
-<div class="card">
-<img alt="공기조화기(AHU)" onerror="this.style.display='none'" src="img/product_ahu.png"/>
-<h3>공기조화기(AHU)</h3>
-<p>공정/시설 조건에 맞춘<br/>맞춤형 공기조화 시스템</p>
-<a class="btn" href="products.html#tab1">자세히</a>
+  <div class="panel">
+    <div style="text-align:center; margin-bottom:24px;">
+      <img src="img/custom_main.png" alt="Custom Solution 대표 이미지" style="width:100%; max-width:760px; border-radius:14px;" onerror="this.style.display='none'">
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:14px; margin-bottom:28px;">
+      <img src="img/custom_detail_01.png" style="width:100%; border-radius:12px;" onerror="this.style.display='none'"><img src="img/custom_detail_02.png" style="width:100%; border-radius:12px;" onerror="this.style.display='none'"><img src="img/custom_detail_03.png" style="width:100%; border-radius:12px;" onerror="this.style.display='none'">
+    </div>
+    <h2>Custom Solution</h2>
+    <p>고객의 생산 공정·설치 환경·요구 사양에 맞춰 설계부터 제작, 납품까지 맞춤 대응하는 솔루션입니다.</p>
+    <h3 style="color:#0b2c4d; ">주요 특징</h3>
+    <ul style="line-height:1.9;"><li>맞춤 설계 및 기술 검토</li><li>현장 환경에 맞춘 제작</li><li>설치 및 시운전 대응</li><li>One-stop 기술 지원</li></ul>
+    <h3 style="color:#0b2c4d; ">적용 분야</h3>
+    <p>고객 맞춤 공정 / 특수 설비 / 라인 개선 프로젝트</p>
+    <div style="">
+      <a class="btn" href="pdf/SNT_catalog.pdf" download>📄 카탈로그(PDF) 다운로드</a>
+      <a class="btn" href="pdf/images.zip" style="margin-left:10px; background:#163f6b;">🖼️ 제품 이미지 ZIP</a>
+    </div>
+  </div>
 </div>
-<div class="card">
-<img alt="항온항습기" onerror="this.style.display='none'" src="img/product_thc.png"/>
-<h3>항온항습기</h3>
-<p>정밀 온도·습도 제어로<br/>안정적인 환경 유지</p>
-<a class="btn" href="products.html#tab2">자세히</a>
-</div>
-<div class="card">
-<img alt="건식제습기" onerror="this.style.display='none'" src="img/product_dehumidifier.png"/>
-<h3>건식제습기</h3>
-<p>저노점 제습으로<br/>공정 품질 안정화 지원</p>
-<a class="btn" href="products.html#tab3">자세히</a>
-</div>
-<div class="card">
-<img alt="CR장비" onerror="this.style.display='none'" src="img/product_cr.png"/>
-<h3>CR장비</h3>
-<p>클린룸 운영에 필요한<br/>부대 설비/구성품</p>
-<a class="btn" href="products.html#tab4">자세히</a>
-</div>
-</div>
-</div>
-</div>
-
-
 
 <footer class="site-footer">
-<div class="footer-inner">
-<div class="footer-logo">
-<img alt="SNT 로고" onerror="this.style.display='none'" src="img/ci_logo_white.png"/>
-</div>
-<div class="footer-text">
-<div><b>대표</b> : 임은석   |   <b>주소</b> : 경기도 화성시 마도면 청원산단5길 26   |   <b>사업자등록번호</b> : 134-86-70313</div>
-<div><b>Tel</b> : 031-508-0252   |   <b>Fax</b> : 031-508-0255   |   <b>E-mail</b> : sntin2010@naver.com</div>
-<div>Copyright © SNT Co., Ltd. All rights reserved.</div>
-</div>
-</div>
-<div class="footer-copy"></div>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <img src="img/ci_logo_white.png" alt="SNT 로고" onerror="this.style.display='none'">
+    </div>
+    <div class="footer-text">
+      <div><b>대표</b> : 임은석 &nbsp; | &nbsp; <b>주소</b> : 경기도 화성시 마도면 청원산단5길 26 &nbsp; | &nbsp; <b>사업자등록번호</b> : 134-86-70313</div>
+      <div><b>Tel</b> : 031-508-0252 &nbsp; | &nbsp; <b>Fax</b> : 031-508-0255 &nbsp; | &nbsp; <b>E-mail</b> : sntin2010@naver.com</div>
+      <div>Copyright © SNT Co., Ltd. All rights reserved.</div>
+    </div>
+  </div>
+  <div class="footer-copy"></div>
 </footer>
+
 </body>
 </html>
