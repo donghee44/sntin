@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SNT | 제품소개</title>
+  
+<style>
+  body { margin:0; font-family:'Noto Sans KR', Arial, sans-serif; background:#f5f6f8; color:#222; }
+  a { color:inherit; text-decoration:none; }
+
+  /* ===== Header (통일) ===== */
+  .site-header{
+    position:sticky; top:0; z-index:999;
+    background:#fff;
+    border-bottom:1px solid #e6e6e6;
+  }
+  .header-inner{
+    max-width:1200px; margin:0 auto;
+    padding:14px 20px;
+    display:flex; align-items:center; justify-content:space-between;
+    gap:24px;
+  }
+
+  /* 로고 크게 + 좌측 배치 */
+  .brand{ display:flex; align-items:center; gap:14px; }
+  .brand img{ height:52px; width:auto; display:block; }
+  .brand .txt{ display:flex; flex-direction:column; line-height:1.1; }
+  .brand .txt .name{ font-weight:900; letter-spacing:1px; color:#0b2c4d; font-size:18px; }
+  .brand .txt .tag{ font-weight:600; color:#6b7a8a; margin-top:4px; font-size:13px; }
+
+  /* ===== Main menu + dropdown ===== */
+  nav.main-nav{ position:relative; }
+  ul.menu{ list-style:none; display:flex; gap:10px; margin:0; padding:0; align-items:center; }
+  ul.menu > li{ position:relative; padding:10px 14px; font-weight:800; cursor:pointer; }
+  ul.menu > li > a{ display:block; padding:8px 6px; }
+  ul.menu > li:hover > a{ color:#0b2c4d; }
+
+  .dropdown{
+    position:absolute; left:50%; transform:translateX(-50%);
+    top:58px;
+    width:min(980px, calc(100vw - 40px));
+    background:#fff;
+    border:1px solid #e9eef3;
+    border-radius:16px;
+    box-shadow:0 18px 40px rgba(0,0,0,0.12);
+    padding:22px 24px;
+    display:none;
+  }
+  ul.menu > li:hover .dropdown{ display:block; }
+
+  .drop-grid{
+    display:grid;
+    grid-template-columns: repeat(5, minmax(150px, 1fr));
+    gap:10px 26px;
+  }
+  .drop-col h4{
+    margin:0 0 10px;
+    font-size:13px;
+    color:#0b2c4d;
+    letter-spacing:0.5px;
+  }
+  .drop-col a{
+    display:block;
+    padding:8px 10px;
+    border-radius:10px;
+    font-size:14px;
+    color:#444;
+  }
+  .drop-col a:hover{ background:#f2f6fa; color:#0b2c4d; }
+
+  /* ===== Visual ===== */
+  .hero{
+    height:420px;
+    background:url('img/hero_bg.jpg') center/cover no-repeat;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .hero .inner{ text-align:center; }
+  .hero .inner img{ height:70px; width:auto; display:block; margin:0 auto; }
+
+  .sub-visual{
+    height:260px;
+    background:center/cover no-repeat;
+    display:flex; align-items:center; justify-content:center;
+    position:relative; color:#fff;
+  }
+  .sub-visual::after{ content:''; position:absolute; inset:0; background:rgba(0,0,0,0.45); }
+  .sub-visual h1{ position:relative; font-size:36px; margin:0; letter-spacing:1px; }
+
+  /* ===== Tabs + content ===== */
+  .tab-menu{ background:#fff; border-bottom:1px solid #ddd; }
+  .tab-menu ul{ display:flex; justify-content:center; flex-wrap:wrap; list-style:none; margin:0; padding:0; }
+  .tab-menu li{ padding:18px 30px; font-size:15px; cursor:pointer; color:#666; position:relative; }
+  .tab-menu li.active{ color:#0b2c4d; font-weight:900; }
+  .tab-menu li.active::after{ content:''; position:absolute; bottom:0; left:0; right:0; height:2px; background:#0b2c4d; }
+
+  .wrap{ max-width:1200px; margin:60px auto; padding:0 20px; }
+  .content-box{ display:none; }
+  .content-box.active{ display:block; }
+
+  .panel{ background:#fff; padding:60px; border-radius:18px; box-shadow:0 10px 30px rgba(0,0,0,0.06); }
+  .panel h2{ margin-top:0; color:#0b2c4d; }
+  .panel p, .panel li{ line-height:1.9; }
+
+  .two-col{ display:grid; grid-template-columns:420px 1fr; gap:60px; align-items:start; }
+  .two-col img{ width:100%; border-radius:10px; }
+
+  .grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:24px; }
+  .card{ background:#fff; border:1px solid #e9eef3; border-radius:16px; padding:22px; box-shadow:0 8px 22px rgba(0,0,0,0.05); }
+  .card img{ width:100%; border-radius:12px; }
+
+  .btn{ display:inline-block; padding:12px 18px; border-radius:6px; background:#0b2c4d; color:#fff; font-weight:900; margin-top:12px; }
+  .btn:hover{ background:#071f35; }
+
+  /* ===== Duckwoo-style home bottom section ===== */
+  .home-bottom{ background:#fff; padding:70px 0 20px; }
+  .home-bottom .inner{ max-width:1200px; margin:0 auto; padding:0 20px; }
+  .bottom-grid{
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap:28px;
+    align-items:stretch;
+  }
+  .notice-box{
+    border-top:2px solid #111;
+    padding-top:18px;
+  }
+  .notice-head{
+    display:flex; align-items:center; justify-content:space-between;
+    font-weight:900; font-size:20px;
+  }
+  .notice-plus{
+    font-size:28px; line-height:1; font-weight:300;
+  }
+  .notice-body{
+    color:#777; padding:50px 0 20px; border-bottom:1px solid #e6e6e6;
+  }
+
+  .link-card{
+    color:#fff;
+    border-radius:0;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:26px 26px;
+    min-height:100px;
+  }
+  .link-card h3{ margin:0; font-size:20px; }
+  .link-card p{ margin:6px 0 0; opacity:0.9; }
+  .link-card .icon{
+    opacity:0.9;
+    font-size:34px;
+    font-weight:700;
+  }
+  .link-card.blue{ background:#063f93; }
+  .link-card.dark{ background:#333; }
+
+  .contact-card{
+    background:#568ad6;
+    color:#fff;
+    padding:26px;
+    display:flex;
+    justify-content:space-between;
+    gap:16px;
+    min-height:214px;
+  }
+  .contact-card h3{ margin:0 0 10px; font-size:20px; }
+  .contact-card .tel{ font-size:34px; font-weight:900; letter-spacing:0.5px; }
+  .contact-card .label{ font-weight:900; margin-top:14px; }
+  .contact-card .val{ opacity:0.95; margin-top:4px; }
+  .contact-card .phone-ico{
+    font-size:48px; opacity:0.85; align-self:center;
+  }
+
+  .inquiry-banner{
+    margin-top:50px;
+    height:240px;
+    background:url('img/inquiry_bg.jpg') center/cover no-repeat;
+    position:relative;
+    display:flex; align-items:center;
+  }
+  .inquiry-banner::after{
+    content:''; position:absolute; inset:0; background:rgba(0,0,0,0.35);
+  }
+  .inquiry-banner .inner{
+    position:relative;
+    max-width:1200px; margin:0 auto; padding:0 20px;
+    color:#fff;
+    width:100%;
+    text-align:center;
+  }
+  .inquiry-banner h2{ margin:0; font-size:40px; letter-spacing:0.5px; }
+  .inquiry-banner p{ margin:10px 0 0; opacity:0.95; }
+  .inquiry-banner a.btn{ margin-top:18px; background:#0b2c4d; border-radius:0; }
+
+  /* ===== Footer ===== */
+  footer.site-footer{
+    background:#111;
+    color:#bbb;
+  }
+  .footer-inner{
+    max-width:1200px; margin:0 auto; padding:34px 20px;
+    display:grid;
+    grid-template-columns: 220px 1fr;
+    gap:30px;
+    align-items:center;
+  }
+  .footer-logo img{ height:34px; width:auto; opacity:0.9; }
+  .footer-text{ font-size:13px; line-height:1.9; color:#aaa; }
+  .footer-text b{ color:#ddd; }
+  .footer-copy{ padding:14px 20px 30px; text-align:center; color:#777; font-size:12px; border-top:1px solid #222; }
+
+  /* Mobile */
+  @media(max-width:980px){
+    .dropdown{ left:0; transform:none; width:calc(100vw - 20px); margin-left:10px; }
+    .drop-grid{ grid-template-columns:repeat(2, minmax(140px, 1fr)); }
+    .bottom-grid{ grid-template-columns:1fr; }
+    .footer-inner{ grid-template-columns:1fr; text-align:center; }
+    .footer-logo{ display:flex; justify-content:center; }
+  }
+  @media(max-width:900px){
+    .two-col{ grid-template-columns:1fr; }
+    ul.menu{ overflow:auto; }
+  }
+</style>
+
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html">
+      <img src="img/ci_logo.png" alt="SNT CI 로고" onerror="this.style.display='none'">
+      <span class="txt">
+        <span class="name">SNT</span>
+        <span class="tag">Speed & Technology</span>
+      </span>
+    </a>
+
+    <nav class="main-nav">
+      <ul class="menu">
+        <li>
+          <a href="about.html">회사소개</a>
+          <div class="dropdown">
+            <div class="drop-grid">
+              <div class="drop-col">
+                <h4>회사소개</h4>
+                <a href="about.html#tab1">인사말</a>
+                <a href="about.html#tab2">CI</a>
+                <a href="about.html#tab3">조직도</a>
+                <a href="about.html#tab4">경영목표</a>
+                <a href="about.html#tab5">회사연혁</a>
+                <a href="about.html#tab6">특허·인증서</a>
+                <a href="about.html#tab7">오시는 길</a>
+              </div>
+              <div class="drop-col">
+                <h4>사업분야</h4>
+                <a href="business.html#tab1">산업 자동화 시스템</a>
+                <a href="business.html#tab2">정밀 기계 솔루션</a>
+                <a href="business.html#tab3">맞춤 장비 개발</a>
+              </div>
+              <div class="drop-col">
+                <h4>제품소개</h4>
+                <a href="products.html#tab1">제품 목록</a>
+                <a href="products.html#tab2">UP TYPE</a>
+                <a href="products.html#tab3">SML150</a>
+                <a href="products.html#tab4">Custom</a>
+                <a href="products.html#tab5">자료 다운로드</a>
+              </div>
+              <div class="drop-col">
+                <h4>연구개발</h4>
+                <a href="rnd.html#tab1">연구개발 현황</a>
+                <a href="rnd.html#tab2">기술 보유 현황</a>
+              </div>
+              <div class="drop-col">
+                <h4>고객센터</h4>
+                <a href="support.html#tab1">공지사항</a>
+                <a href="support.html#tab2">온라인 문의</a>
+                <a href="support.html#tab3">제품 카탈로그</a>
+                <a href="support.html#tab4">설치 및 A/S</a>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li><a href="business.html">사업분야</a></li>
+        <li><a href="products.html">제품소개</a></li>
+        <li><a href="rnd.html">연구개발</a></li>
+        <li><a href="support.html">고객센터</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="sub-visual" style="background-image:url('img/sub_products.jpg');">
+  <h1>제품소개</h1>
+</div>
+<div class="tab-menu"><ul><li class="active" data-tab="tab1">제품 목록</li>
+<li class="" data-tab="tab2">UP TYPE</li>
+<li class="" data-tab="tab3">SML150</li>
+<li class="" data-tab="tab4">Custom</li>
+<li class="" data-tab="tab5">자료 다운로드</li></ul></div>
+<div class="wrap">
+<div id="tab1" class="content-box active">
+  <div class="panel">
+    <h2>제품 목록</h2>
+    
+<div class="grid">
+  <div class="card">
+    <img src="img/up_main.png" alt="UP TYPE" onerror="this.style.display='none'">
+    <h3>UP TYPE 장비</h3>
+    <p>상향식 구조 기반의 자동화 장비</p>
+    <a class="btn" href="product_up.html">상세보기</a>
+  </div>
+  <div class="card">
+    <img src="img/sml150_main.png" alt="SML150" onerror="this.style.display='none'">
+    <h3>SML150 Series</h3>
+    <p>정밀 제어와 내구성 강화 모델</p>
+    <a class="btn" href="product_sml150.html">상세보기</a>
+  </div>
+  <div class="card">
+    <img src="img/custom_main.png" alt="Custom" onerror="this.style.display='none'">
+    <h3>Custom Solution</h3>
+    <p>고객 맞춤 설계·제작 솔루션</p>
+    <a class="btn" href="product_custom.html">상세보기</a>
+  </div>
+</div>
+
+  </div>
+</div>
+<div id="tab2" class="content-box ">
+  <div class="panel">
+    <div class="two-col">
+      <img src="img/up_main.png" alt="UP TYPE 장비" onerror="this.style.display='none'">
+      <div>
+        <h2>UP TYPE 장비</h2>
+        <p>자동화 라인에 적용되는 상향식 구조의 장비입니다.</p><a class='btn' href='product_up.html'>상세 페이지</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="tab3" class="content-box ">
+  <div class="panel">
+    <div class="two-col">
+      <img src="img/sml150_main.png" alt="SML150 Series" onerror="this.style.display='none'">
+      <div>
+        <h2>SML150 Series</h2>
+        <p>정밀 제어와 내구성을 강화한 주력 시리즈입니다.</p><a class='btn' href='product_sml150.html'>상세 페이지</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="tab4" class="content-box ">
+  <div class="panel">
+    <div class="two-col">
+      <img src="img/custom_main.png" alt="Custom Solution" onerror="this.style.display='none'">
+      <div>
+        <h2>Custom Solution</h2>
+        <p>현장 요구 사양에 맞춘 맞춤형 장비 설계·제작 솔루션입니다.</p><a class='btn' href='product_custom.html'>상세 페이지</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="tab5" class="content-box ">
+  <div class="panel">
+    <h2>자료 다운로드</h2>
+    
+<p>아래 자료를 다운로드할 수 있습니다.</p>
+<a class="btn" href="pdf/SNT_catalog.pdf" download>📄 카탈로그(PDF) 다운로드</a>
+<a class="btn" href="pdf/images.zip" style="margin-left:10px; background:#163f6b;">🖼️ 제품 이미지 ZIP</a>
+
+  </div>
+</div>
+</div>
+
+<script>
+function initTabs(){
+  const tabs = document.querySelectorAll('.tab-menu li');
+  const panels = document.querySelectorAll('.content-box');
+  function activate(id){
+    tabs.forEach(t=>t.classList.toggle('active', t.dataset.tab===id));
+    panels.forEach(p=>p.classList.toggle('active', p.id===id));
+  }
+  tabs.forEach(tab=>{
+    tab.addEventListener('click', ()=>{
+      const id = tab.dataset.tab;
+      history.replaceState(null, '', '#' + id);
+      activate(id);
+    });
+  });
+  const hash = location.hash.replace('#','');
+  if(hash && document.getElementById(hash)) activate(hash);
+}
+document.addEventListener('DOMContentLoaded', initTabs);
+</script>
+
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <img src="img/ci_logo_white.png" alt="SNT 로고" onerror="this.style.display='none'">
+    </div>
+    <div class="footer-text">
+      <div><b>대표</b> : 임은석 &nbsp; | &nbsp; <b>주소</b> : (여기에 회사 주소 입력) &nbsp; | &nbsp; <b>사업자등록번호</b> : (번호 입력)</div>
+      <div><b>Tel</b> : (전화번호) &nbsp; | &nbsp; <b>Fax</b> : (팩스번호) &nbsp; | &nbsp; <b>E-mail</b> : (이메일)</div>
+      <div>Copyright © SNT Co., Ltd. All rights reserved.</div>
+    </div>
+  </div>
+  <div class="footer-copy">관리자</div>
+</footer>
+
+</body>
+</html>
