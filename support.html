@@ -311,6 +311,65 @@
   .sub-visual .inner, .sub-visual h1{ position:relative; z-index:1; }
   .sub-visual h1{ color:#ffffff; text-shadow:0 2px 14px rgba(0,0,0,0.55); }
 
+
+/* ===== Customer center layout (Duckwoo-style) ===== */
+  .cs-grid{
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap:24px;
+    align-items:start;
+    margin-top:12px;
+  }
+  .cs-col{ background:transparent; }
+  .cs-head{ display:flex; justify-content:space-between; align-items:center; }
+  .cs-head h2{ margin:0; font-size:22px; }
+  .cs-plus{
+    width:44px; height:44px;
+    border:0; background:transparent;
+    font-size:34px; line-height:1;
+    cursor:pointer;
+  }
+  .cs-empty{ color:#666; text-align:center; padding:52px 0; }
+  .cs-line{ height:1px; background:#e7eaee; margin-top:22px; }
+
+  .cs-actions{ display:flex; flex-direction:column; gap:18px; }
+  .cs-action{
+    display:flex; align-items:center; gap:16px;
+    padding:22px 22px;
+    border-radius:0;
+    text-decoration:none;
+    color:#fff;
+  }
+  .cs-action .cs-ico{
+    width:54px; height:54px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:28px;
+    opacity:.95;
+  }
+  .cs-way{ background:#0b4aa6; }
+  .cs-catalog{ background:#3a3a3a; }
+  .cs-title{ font-weight:800; font-size:20px; }
+  .cs-sub{ margin-top:6px; opacity:.9; font-size:14px; }
+
+  .cs-contact-card{
+    background:#5b8fd8;
+    color:#fff;
+    padding:22px 22px;
+    min-height:190px;
+    position:relative;
+  }
+  .cs-contact-title{ font-weight:800; font-size:18px; opacity:.95; }
+  .cs-contact-tel{ font-weight:900; font-size:32px; margin-top:10px; letter-spacing:-0.5px; }
+  .cs-contact-meta{ margin-top:14px; font-size:14px; line-height:1.35; opacity:.95; }
+  .cs-phone{
+    position:absolute; right:18px; bottom:18px;
+    font-size:44px; opacity:.55;
+  }
+
+  @media (max-width: 960px){
+    .cs-grid{ grid-template-columns: 1fr; }
+    .cs-contact-card{ min-height:unset; }
+  }
 </style>
 
 </head>
@@ -379,9 +438,44 @@
 <div class="wrap">
 <div id="tab1" class="content-box active">
   <div class="panel">
-    <h2>공지사항</h2>
-    <p>공지사항 영역입니다. (추후 게시판 연동 가능)</p>
+<div class="cs-grid">
+  <div class="cs-col cs-notice">
+    <div class="cs-head">
+      <h2>공지사항</h2>
+      <button class="cs-plus" type="button" aria-label="더보기">+</button>
+    </div>
+    <div class="cs-empty">게시물이 없습니다.</div>
+    <div class="cs-line"></div>
   </div>
+
+  <div class="cs-col cs-actions">
+    <a class="cs-action cs-way" href="about.html#tab7">
+      <div class="cs-ico">📍</div>
+      <div class="cs-txt">
+        <div class="cs-title">오시는 길 안내</div>
+      </div>
+    </a>
+    <a class="cs-action cs-catalog" href="support.html#tab3">
+      <div class="cs-ico">📖</div>
+      <div class="cs-txt">
+        <div class="cs-title">제품 카탈로그</div>
+        <div class="cs-sub">제품 카탈로그 e-Book 보기</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="cs-col cs-contact">
+    <div class="cs-contact-card">
+      <div class="cs-contact-title">고객센터</div>
+      <div class="cs-contact-tel">031-366-2571~6</div>
+      <div class="cs-contact-meta">
+        <div><b>Fax</b><br>031-366-2577</div>
+        <div style="margin-top:10px;"><b>E-mail</b><br>deokwooind@hanmail.net</div>
+      </div>
+      <div class="cs-phone">☎</div>
+    </div>
+  </div>
+</div></div>
 </div>
 <div id="tab2" class="content-box ">
   <div class="panel">
