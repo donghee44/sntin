@@ -1,392 +1,55 @@
 <!DOCTYPE html>
-<html lang="ko">
-<head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>SNT | 고객센터</title>
+<html lang="ko"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SNT | 고객센터</title>
+<link rel="stylesheet" href="css/common.css">
+<link rel="stylesheet" href="css/page.css">
+</head><body>
+<header class="site-header"><div class="header-inner">
+<a class="brand" href="index.html"><img src="img/ci_logo.png" alt="SNT CI 로고" onerror="this.style.display='none'"></a>
+<nav class="main-nav"><ul class="menu">
+<li class="has-drop"><a href="about.html">회사소개</a><div class="dropdown">
+<a href="about.html#tab1">인사말</a><a href="about.html#tab2">CI</a><a href="about.html#tab3">조직도</a><a href="about.html#tab4">경영목표</a><a href="about.html#tab5">회사연혁</a><a href="about.html#tab6">특허·인증서</a><a href="about.html#tab7">오시는 길</a>
+</div></li>
+<li class="has-drop"><a href="business.html">사업분야</a><div class="dropdown">
+<a href="business.html#tab1">클린룸 시스템</a><a href="business.html#tab2">항온항습 시스템</a><a href="business.html#tab3">제습 시스템</a><a href="business.html#tab4">냉동 공조 시스템</a>
+</div></li>
+<li class="has-drop"><a href="products.html">제품소개</a><div class="dropdown">
+<a href="products.html#tab1">공기조화기(AHU)</a><a href="products.html#tab2">항온항습기</a><a href="products.html#tab3">건식제습기</a><a href="products.html#tab4">CR장비</a>
+</div></li>
+<li class="has-drop"><a href="rnd.html">연구개발</a><div class="dropdown">
+<a href="rnd.html#tab1">연구개발 현황</a><a href="rnd.html#tab2">기술 보유 현황</a>
+</div></li>
+<li class="has-drop"><a href="support.html">고객센터</a><div class="dropdown">
+<a href="support.html#tab1">공지사항</a><a href="support.html#tab2">온라인 문의</a><a href="support.html#tab3">제품 카탈로그</a><a href="support.html#tab4">설치 및 A/S</a>
+</div></li>
+</ul></nav></div></header>
+<div class="sub-visual"><h1>고객센터</h1></div>
 
-  <style>
-    body { margin:0; font-family:'Noto Sans KR', Arial, sans-serif; background:#f5f6f8; color:#222; }
-    a { color:inherit; text-decoration:none; }
+<div class="tab-menu"><ul><li class='active' data-tab='tab1'>공지사항</li><li class='' data-tab='tab2'>온라인 문의</li><li class='' data-tab='tab3'>제품 카탈로그</li><li class='' data-tab='tab4'>설치 및 A/S</li></ul></div>
+<div class="wrap"><div id='tab1' class='content-box active'><div class='panel'><h2>공지사항</h2><ul id='noticeListSupport' class='notice-list'></ul></div></div><div id='tab2' class='content-box'><div class='panel'><h2>온라인 문의</h2><p>문의사항은 아래 연락처로 접수해 주시면 신속히 안내드리겠습니다.</p><p><b>Tel</b> : 031-508-0252<br><b>Fax</b> : 031-508-0255<br><b>E-mail</b> : sntin2010@naver.com</p></div></div><div id='tab3' class='content-box'><div class='panel'><h2>제품 카탈로그</h2><p>제품 카탈로그(PDF)를 다운로드하실 수 있습니다.</p><div style='margin-top:18px;'><a class='btn' href='pdf/SNT_catalog.pdf' download>📄 카탈로그 다운로드</a></div></div></div><div id='tab4' class='content-box'><div class='panel'><h2>설치 및 A/S</h2><p>설치/점검 및 A/S 관련 문의는 아래 연락처로 접수해 주세요.</p><p><b>Tel</b> : 031-508-0252<br><b>E-mail</b> : sntin2010@naver.com</p></div></div></div>
 
-    /* ===== Header (통일) ===== */
-    .site-header{
-      position:sticky; top:0; z-index:999;
-      background:#fff;
-      border-bottom:1px solid #e6e6e6;
-    }
-    .header-inner{
-      max-width:1200px; margin:0 auto;
-      padding:14px 20px;
-      display:flex; align-items:center; justify-content:space-between;
-      gap:24px;
-    }
-    .brand{ display:flex; align-items:center; gap:0; }
-    .brand img{ height:52px; width:auto; display:block; }
+<footer class="site-footer"><div class="footer-inner">
+<div class="footer-logo"><img src="img/ci_logo_white.png" alt="SNT 로고" onerror="this.style.display='none'"></div>
+<div class="footer-text">
+<div><b>대표</b> : 임은석 &nbsp; | &nbsp; <b>주소</b> : 경기도 화성시 마도면 청원산단5길 26 &nbsp; | &nbsp; <b>사업자등록번호</b> : 134-86-70313</div>
+<div><b>Tel</b> : 031-508-0252 &nbsp; | &nbsp; <b>Fax</b> : 031-508-0255 &nbsp; | &nbsp; <b>E-mail</b> : sntin2010@naver.com</div>
+<div>Copyright © SNT Co., Ltd. All rights reserved.</div>
+</div></div><div class="footer-copy"></div></footer>
 
-    /* ===== Main menu + dropdown ===== */
-    nav.main-nav{ position:relative; }
-    ul.menu{ list-style:none; display:flex; gap:10px; margin:0; padding:0; align-items:center; }
-    ul.menu > li{ position:relative; padding:10px 14px; font-weight:800; cursor:pointer; }
-    ul.menu > li > a{
-      display:block;
-      padding:10px 8px;
-      border-radius:8px;
-      transition: color .15s ease, background .15s ease;
-    }
-    ul.menu > li:hover > a{ color:#0b2c4d; background:#f2f6fa; }
-    ul.menu > li.has-drop:hover > a::after{
-      content:'';
-      position:absolute;
-      left:8px; right:8px;
-      bottom:-6px;
-      height:2px;
-      background:#0b2c4d;
-      border-radius:999px;
-    }
-
-    .dropdown.small{
-      position:absolute;
-      left:0;
-      top:54px;
-      width:max-content;
-      min-width:170px;
-      max-width:260px;
-      background:#fff;
-      border:1px solid #e9eef3;
-      border-radius:10px;
-      box-shadow:0 14px 28px rgba(0,0,0,0.12);
-      padding:8px 8px;
-      display:none;
-    }
-    ul.menu > li:hover .dropdown.small{ display:block; }
-    .dropdown.small .drop-col a{
-      display:block;
-      padding:8px 10px;
-      border-radius:8px;
-      font-size:13px;
-      color:#444;
-      white-space:nowrap;
-    }
-    .dropdown.small .drop-col a:hover{
-      background:#f2f6fa;
-      color:#0b2c4d;
-    }
-
-    /* ===== Sub Visual ===== */
-    .sub-visual{
-      height:260px;
-      background:center/cover no-repeat;
-      display:flex; align-items:center; justify-content:center;
-      position:relative;
-      color:#fff;
-      background-image:url('img/hero_bg.jpg');
-      background-color:#222; /* fallback */
-    }
-    .sub-visual::after{ content:''; position:absolute; inset:0; background:rgba(0,0,0,0.35); }
-    .sub-visual h1{
-      position:relative;
-      margin:0;
-      font-size:36px;
-      letter-spacing:1px;
-      color:#fff;
-      text-shadow:0 2px 14px rgba(0,0,0,0.55);
-    }
-
-    /* ===== Tabs ===== */
-    .tab-menu{ background:#fff; border-bottom:1px solid #ddd; }
-    .tab-menu ul{ display:flex; justify-content:center; flex-wrap:wrap; list-style:none; margin:0; padding:0; }
-    .tab-menu li{ padding:18px 30px; font-size:15px; cursor:pointer; color:#666; position:relative; }
-    .tab-menu li.active{ color:#0b2c4d; font-weight:900; }
-    .tab-menu li.active::after{ content:''; position:absolute; bottom:0; left:0; right:0; height:2px; background:#0b2c4d; }
-
-    .wrap{ max-width:1200px; margin:60px auto; padding:0 20px; }
-    .content-box{ display:none; }
-    .content-box.active{ display:block; }
-
-    .panel{
-      background:#fff;
-      padding:60px;
-      border-radius:18px;
-      box-shadow:0 10px 30px rgba(0,0,0,0.06);
-    }
-    .panel h2{ margin:0 0 18px; color:#0b2c4d; }
-    .panel p{ line-height:1.9; color:#444; margin:0 0 10px; }
-
-    /* ===== Notice list (Support full view) ===== */
-    .notice-list { list-style:none; padding:0; margin:0; }
-    .notice-list li { padding:16px 0; border-bottom:1px solid #e6e6e6; }
-    .notice-item-full .top { display:flex; gap:12px; align-items:baseline; flex-wrap:wrap; }
-    .notice-item-full .d { color:#777; min-width:110px; font-weight:800; }
-    .notice-item-full .t { font-weight:900; color:#222; }
-    .notice-item-full .c { margin-top:10px; color:#555; line-height:1.8; white-space:pre-line; }
-
-    .empty-note{
-      color:#777;
-      padding:10px 0 0;
-    }
-
-    /* ===== Button ===== */
-    .btn{
-      display:inline-block;
-      padding:12px 18px;
-      border-radius:6px;
-      background:#0b2c4d;
-      color:#fff;
-      font-weight:900;
-    }
-    .btn:hover{ background:#071f35; }
-
-    /* ===== Footer ===== */
-    footer.site-footer{
-      background:#111;
-      color:#bbb;
-      margin-top:56px;
-    }
-    .footer-inner{
-      max-width:1200px; margin:0 auto; padding:34px 20px;
-      display:grid;
-      grid-template-columns: 220px 1fr;
-      gap:30px;
-      align-items:center;
-    }
-    .footer-logo img{ height:34px; width:auto; opacity:0.9; display:block; }
-    .footer-text{ font-size:13px; line-height:1.9; color:#aaa; }
-    .footer-text b{ color:#ddd; }
-    .footer-copy{ padding:14px 20px 30px; text-align:center; color:#777; font-size:12px; border-top:1px solid #222; }
-
-    /* Mobile */
-    @media(max-width:980px){
-      .footer-inner{ grid-template-columns:1fr; text-align:center; }
-      .footer-logo{ display:flex; justify-content:center; }
-      ul.menu{ overflow:auto; }
-      .panel{ padding:34px; }
-    }
-  </style>
-</head>
-
-<body>
-  <!-- ===== Header ===== -->
-  <header class="site-header">
-    <div class="header-inner">
-      <a class="brand" href="index.html">
-        <img src="img/ci_logo.png" alt="SNT CI 로고" onerror="this.style.display='none'"/>
-      </a>
-
-      <nav class="main-nav">
-        <ul class="menu">
-          <li class="has-drop">
-            <a href="about.html">회사소개</a>
-            <div class="dropdown small">
-              <div class="drop-col">
-                <a href="about.html#tab1">인사말</a>
-                <a href="about.html#tab2">CI</a>
-                <a href="about.html#tab3">조직도</a>
-                <a href="about.html#tab4">경영목표</a>
-                <a href="about.html#tab5">회사연혁</a>
-                <a href="about.html#tab6">특허·인증서</a>
-                <a href="about.html#tab7">오시는 길</a>
-              </div>
-            </div>
-          </li>
-
-          <li class="has-drop">
-            <a href="business.html">사업분야</a>
-            <div class="dropdown small">
-              <div class="drop-col">
-                <a href="business.html#tab1">클린룸 시스템</a>
-                <a href="business.html#tab2">항온항습 시스템</a>
-                <a href="business.html#tab3">제습 시스템</a>
-                <a href="business.html#tab4">냉동 공조 시스템</a>
-              </div>
-            </div>
-          </li>
-
-          <li class="has-drop">
-            <a href="products.html">제품소개</a>
-            <div class="dropdown small">
-              <div class="drop-col">
-                <a href="products.html#tab1">공기조화기(AHU)</a>
-                <a href="products.html#tab2">항온항습기</a>
-                <a href="products.html#tab3">건식제습기</a>
-                <a href="products.html#tab4">CR장비</a>
-              </div>
-            </div>
-          </li>
-
-          <li class="has-drop">
-            <a href="rnd.html">연구개발</a>
-            <div class="dropdown small">
-              <div class="drop-col">
-                <a href="rnd.html#tab1">연구개발 현황</a>
-                <a href="rnd.html#tab2">기술 보유 현황</a>
-              </div>
-            </div>
-          </li>
-
-          <li class="has-drop">
-            <a href="support.html">고객센터</a>
-            <div class="dropdown small">
-              <div class="drop-col">
-                <a href="support.html#tab1">공지사항</a>
-                <a href="support.html#tab2">온라인 문의</a>
-                <a href="support.html#tab3">제품 카탈로그</a>
-                <a href="support.html#tab4">설치 및 A/S</a>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-
-  <!-- ===== Sub Visual ===== -->
-  <div class="sub-visual">
-    <h1>고객센터</h1>
-  </div>
-
-  <!-- ===== Tabs ===== -->
-  <div class="tab-menu">
-    <ul>
-      <li class="active" data-tab="tab1">공지사항</li>
-      <li data-tab="tab2">온라인 문의</li>
-      <li data-tab="tab3">제품 카탈로그</li>
-      <li data-tab="tab4">설치 및 A/S</li>
-    </ul>
-  </div>
-
-  <!-- ===== Content ===== -->
-  <div class="wrap">
-    <!-- 공지사항 -->
-    <div id="tab1" class="content-box active">
-      <div class="panel">
-        <h2>공지사항</h2>
-        <ul id="noticeListSupport" class="notice-list"></ul>
-        <div id="noticeEmptySupport" class="empty-note" style="display:none;">등록된 공지사항이 없습니다.</div>
-      </div>
-    </div>
-
-    <!-- 온라인 문의 -->
-    <div id="tab2" class="content-box">
-      <div class="panel">
-        <h2>온라인 문의</h2>
-        <p>문의사항은 아래 연락처로 접수해 주시면 신속히 안내드리겠습니다.</p>
-        <p><b>Tel</b> : 031-508-0252</p>
-        <p><b>Fax</b> : 031-508-0255</p>
-        <p><b>E-mail</b> : sntin2010@naver.com</p>
-        <p style="margin-top:14px; color:#666;">(추후 문의 폼 연동도 가능합니다)</p>
-      </div>
-    </div>
-
-    <!-- 제품 카탈로그 -->
-    <div id="tab3" class="content-box">
-      <div class="panel">
-        <h2>제품 카탈로그</h2>
-        <p>제품 카탈로그(PDF)를 다운로드하실 수 있습니다.</p>
-        <div style="margin-top:18px;">
-          <a class="btn" href="pdf/SNT_catalog.pdf" download>📄 카탈로그 다운로드</a>
-        </div>
-        <p style="margin-top:14px; color:#666;">※ 파일 경로가 다르면 링크를 맞춰주세요. (예: pdf 폴더/파일명)</p>
-      </div>
-    </div>
-
-    <!-- 설치 및 A/S -->
-    <div id="tab4" class="content-box">
-      <div class="panel">
-        <h2>설치 및 A/S</h2>
-        <p>설치/점검 및 A/S 관련 문의는 아래 연락처로 접수해 주세요.</p>
-        <p><b>Tel</b> : 031-508-0252</p>
-        <p><b>E-mail</b> : sntin2010@naver.com</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- ===== Footer ===== -->
-  <footer class="site-footer">
-    <div class="footer-inner">
-      <div class="footer-logo">
-        <img src="img/ci_logo_white.png" alt="SNT 로고" onerror="this.style.display='none'"/>
-      </div>
-      <div class="footer-text">
-        <div><b>대표</b> : 임은석 &nbsp; | &nbsp; <b>주소</b> : 경기도 화성시 마도면 청원산단5길 26 &nbsp; | &nbsp; <b>사업자등록번호</b> : 134-86-70313</div>
-        <div><b>Tel</b> : 031-508-0252 &nbsp; | &nbsp; <b>Fax</b> : 031-508-0255 &nbsp; | &nbsp; <b>E-mail</b> : sntin2010@naver.com</div>
-        <div>Copyright © SNT Co., Ltd. All rights reserved.</div>
-      </div>
-    </div>
-    <div class="footer-copy"></div>
-  </footer>
-
-  <!-- ===== Scripts: Tabs + Notices ===== -->
-  <script>
-    // 탭 전환 + 해시(#tabX) 연동 + 상단 유지
-    function showTab(tabId){
-      document.querySelectorAll('.tab-menu li').forEach(li => {
-        li.classList.toggle('active', li.dataset.tab === tabId);
-      });
-      document.querySelectorAll('.content-box').forEach(box => {
-        box.classList.toggle('active', box.id === tabId);
-      });
-      window.scrollTo({top:0, left:0, behavior:'instant'});
-    }
-
-    function tabFromHash(){
-      const hash = (location.hash || '').replace('#','');
-      if(hash && document.getElementById(hash)){
-        showTab(hash);
-        return;
-      }
-      showTab('tab1');
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      document.querySelectorAll('.tab-menu li').forEach(li => {
-        li.addEventListener('click', () => {
-          const tabId = li.dataset.tab;
-          history.replaceState(null, '', '#' + tabId);
-          showTab(tabId);
-        });
-      });
-      tabFromHash();
+<script src="js/tabs.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  document.querySelectorAll('.tab-menu li').forEach(function(li){
+    li.addEventListener('click', function(){
+      var id = li.dataset.tab;
+      history.replaceState(null, '', '#' + id);
+      window.SNTTabs.showTab(id);
     });
-
-    window.addEventListener('hashchange', tabFromHash);
-
-    // 공지사항 로드 (data/notices.json)
-    async function loadNoticesSupport(){
-      try{
-        const res = await fetch('./data/notices.json', { cache:'no-store' });
-        const notices = await res.json();
-
-        const list = document.getElementById('noticeListSupport');
-        const empty = document.getElementById('noticeEmptySupport');
-        if(!list) return;
-
-        list.innerHTML = '';
-        if(Array.isArray(notices) && notices.length > 0){
-          empty.style.display = 'none';
-          notices.forEach(n=>{
-            const li = document.createElement('li');
-            li.innerHTML = `
-              <div class="notice-item-full">
-                <div class="top">
-                  <span class="d">${n.date || ''}</span>
-                  <span class="t">${n.title || ''}</span>
-                </div>
-                <div class="c">${n.content || ''}</div>
-              </div>
-            `;
-            list.appendChild(li);
-          });
-        }else{
-          empty.style.display = 'block';
-        }
-      }catch(e){
-        console.log('공지사항 로드 실패:', e);
-        const empty = document.getElementById('noticeEmptySupport');
-        if(empty) empty.style.display = 'block';
-      }
-    }
-    document.addEventListener('DOMContentLoaded', loadNoticesSupport);
-  </script>
-</body>
-</html>
+  });
+  window.SNTTabs.tabFromHash('tab1');
+});
+window.addEventListener('hashchange', function(){ window.SNTTabs.tabFromHash('tab1'); });
+</script>
+<script src='js/notices.js'></script><script>document.addEventListener('DOMContentLoaded', function(){ loadNotices('noticeListSupport'); });</script>
+</body></html>
