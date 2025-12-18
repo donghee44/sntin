@@ -6,82 +6,185 @@
 <title>SNT | 회사소개</title>
 
 <style>
-body{margin:0;font-family:'Noto Sans KR',Arial,sans-serif;background:#f5f6f8;color:#222}
-a{text-decoration:none;color:inherit}
+  body{margin:0;font-family:'Noto Sans KR',Arial,sans-serif;background:#f5f6f8;color:#222}
+  a{color:inherit;text-decoration:none}
 
-/* ===== Header ===== */
-.site-header{position:sticky;top:0;z-index:999;background:#fff;border-bottom:1px solid #e6e6e6}
-.header-inner{max-width:1200px;margin:0 auto;padding:14px 20px;display:flex;justify-content:space-between;align-items:center}
-.brand img{height:52px}
+  /* ===== Header (통일) ===== */
+  .site-header{position:sticky;top:0;z-index:999;background:#fff;border-bottom:1px solid #e6e6e6}
+  .header-inner{max-width:1200px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+  .brand{display:flex;align-items:center}
+  .brand img{height:52px;width:auto;display:block}
 
-/* ===== Navigation ===== */
-ul.menu{list-style:none;display:flex;gap:10px;margin:0;padding:0}
-ul.menu>li{position:relative;font-weight:800}
-ul.menu>li>a{padding:10px 12px;display:block;border-radius:8px}
-ul.menu>li:hover>a{background:#f2f6fa;color:#0b2c4d}
+  nav.main-nav{position:relative}
+  ul.menu{list-style:none;display:flex;gap:10px;margin:0;padding:0;align-items:center}
+  ul.menu>li{position:relative;font-weight:800}
+  ul.menu>li>a{display:block;padding:10px 8px;border-radius:8px;transition:color .15s ease,background .15s ease;position:relative}
+  ul.menu>li:hover>a{color:#0b2c4d;background:#f2f6fa}
+  ul.menu>li.has-drop:hover>a::after{
+    content:'';position:absolute;left:8px;right:8px;bottom:-6px;height:2px;background:#0b2c4d;border-radius:999px
+  }
 
-.dropdown.small{display:none;position:absolute;top:52px;left:0;background:#fff;border:1px solid #e9eef3;border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,.12);padding:8px}
-ul.menu>li:hover .dropdown.small{display:block}
-.dropdown.small a{display:block;padding:8px 10px;font-size:14px;border-radius:8px}
-.dropdown.small a:hover{background:#f2f6fa;color:#0b2c4d}
+  .dropdown.small{
+    position:absolute;left:0;top:54px;
+    width:max-content;min-width:170px;max-width:260px;
+    background:#fff;border:1px solid #e9eef3;border-radius:10px;
+    box-shadow:0 14px 28px rgba(0,0,0,0.12);
+    padding:8px;display:none
+  }
+  ul.menu>li:hover .dropdown.small{display:block}
+  .dropdown.small a{display:block;padding:8px 10px;border-radius:8px;font-size:13px;color:#444;white-space:nowrap}
+  .dropdown.small a:hover{background:#f2f6fa;color:#0b2c4d}
 
-/* ===== Sub visual ===== */
-.sub-visual{
-height:240px;
-background:url('img/sub_about.jpg') center/cover no-repeat;
-position:relative;
-display:flex;align-items:center;justify-content:center
-}
-.sub-visual::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,.45)}
-.sub-visual h1{position:relative;color:#fff;font-size:36px}
+  /* ===== Sub visual ===== */
+  .sub-visual{
+    height:260px;
+    background:url('img/sub_about.jpg') center/cover no-repeat;
+    display:flex;align-items:center;justify-content:center;
+    position:relative;color:#fff;
+    background-color:#222;
+  }
+  .sub-visual::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,0.35)}
+  .sub-visual h1{
+    position:relative;z-index:1;
+    margin:0;font-size:36px;letter-spacing:1px;
+    color:#fff;text-shadow:0 2px 10px rgba(0,0,0,0.6)
+  }
 
-/* ===== Tabs ===== */
-.tab-menu{background:#fff;border-bottom:1px solid #ddd}
-.tab-menu ul{list-style:none;display:flex;justify-content:center;margin:0;padding:0;flex-wrap:wrap}
-.tab-menu li{padding:18px 26px;cursor:pointer;color:#666}
-.tab-menu li.active{color:#0b2c4d;font-weight:900;border-bottom:2px solid #0b2c4d}
+  /* ===== Tabs ===== */
+  .tab-menu{background:#fff;border-bottom:1px solid #ddd}
+  .tab-menu ul{display:flex;justify-content:center;flex-wrap:wrap;list-style:none;margin:0;padding:0}
+  .tab-menu li{padding:18px 26px;font-size:15px;cursor:pointer;color:#666;position:relative}
+  .tab-menu li.active{color:#0b2c4d;font-weight:900}
+  .tab-menu li.active::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:#0b2c4d}
 
-/* ===== Content ===== */
-.wrap{max-width:1200px;margin:60px auto;padding:0 20px}
-.panel{background:#fff;padding:60px;border-radius:18px;box-shadow:0 10px 30px rgba(0,0,0,.06)}
-.panel h2{margin-top:0;color:#0b2c4d}
-.panel p{line-height:1.9}
+  /* ===== Content ===== */
+  .wrap{max-width:1200px;margin:60px auto;padding:0 20px}
+  .content-box{display:none}
+  .content-box.active{display:block}
 
-.content-box{display:none}
-.content-box.active{display:block}
+  .panel{background:#fff;padding:60px;border-radius:18px;box-shadow:0 10px 30px rgba(0,0,0,0.06)}
+  .panel h2{margin-top:0;color:#0b2c4d}
+  .panel p,.panel li{line-height:1.9}
 
-/* ===== Footer ===== */
-footer{background:#111;color:#bbb;margin-top:80px}
-.footer-inner{max-width:1200px;margin:0 auto;padding:34px 20px;display:grid;grid-template-columns:220px 1fr;gap:30px}
-.footer-logo img{height:34px}
-.footer-text{font-size:13px;line-height:1.9;color:#aaa}
-.footer-copy{text-align:center;font-size:12px;color:#777;padding:14px 0;border-top:1px solid #222}
+  .two-col{display:grid;grid-template-columns:420px 1fr;gap:48px;align-items:start}
+  .two-col img{
+    width:100%;height:320px;object-fit:contain;background:#f4f6f8;
+    border-radius:14px;border:1px solid #e9eef3
+  }
 
-@media(max-width:900px){
-.footer-inner{grid-template-columns:1fr;text-align:center}
-}
+  /* Simple blocks */
+  .kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
+  .kpi .box{background:#f6f8fb;border:1px solid #e9eef3;border-radius:14px;padding:18px}
+  .kpi .ttl{font-weight:900;color:#0b2c4d}
+  .kpi .txt{margin-top:8px;color:#555;line-height:1.6}
+
+  /* Timeline */
+  .timeline{margin:0;padding:0;list-style:none}
+  .timeline li{display:grid;grid-template-columns:110px 1fr;gap:16px;padding:14px 0;border-bottom:1px solid #eef2f6}
+  .timeline .year{font-weight:900;color:#0b2c4d}
+  .timeline .desc{color:#333}
+
+  /* Cert grid */
+  .cert-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
+  .cert{border:1px solid #e9eef3;border-radius:14px;background:#f6f8fb;padding:16px}
+  .cert .name{font-weight:900;color:#0b2c4d}
+  .cert .meta{margin-top:8px;color:#555;line-height:1.6;font-size:14px}
+  .note{color:#666;margin-top:10px;font-size:14px;line-height:1.7}
+
+  /* Map */
+  .map-wrap{margin-top:16px;border-radius:12px;overflow:hidden;border:1px solid #e9eef3}
+
+  /* ===== Footer ===== */
+  footer.site-footer{background:#111;color:#bbb;margin-top:80px}
+  .footer-inner{
+    max-width:1200px;margin:0 auto;padding:34px 20px;
+    display:grid;grid-template-columns:220px 1fr;gap:30px;align-items:center
+  }
+  .footer-logo img{height:34px;width:auto;opacity:0.9}
+  .footer-text{font-size:13px;line-height:1.9;color:#aaa}
+  .footer-text b{color:#ddd}
+  .footer-copy{padding:14px 20px 30px;text-align:center;color:#777;font-size:12px;border-top:1px solid #222}
+
+  @media(max-width:980px){
+    ul.menu{overflow:auto}
+    .two-col{grid-template-columns:1fr}
+    .kpi{grid-template-columns:1fr}
+    .cert-grid{grid-template-columns:1fr}
+    .footer-inner{grid-template-columns:1fr;text-align:center}
+    .footer-logo{display:flex;justify-content:center}
+  }
 </style>
 </head>
 
 <body>
-
 <header class="site-header">
   <div class="header-inner">
     <a class="brand" href="index.html">
-      <img src="img/ci_logo.png" alt="SNT 로고">
+      <img src="img/ci_logo.png" alt="SNT CI 로고" onerror="this.style.display='none'">
     </a>
-    <nav>
+
+    <nav class="main-nav">
       <ul class="menu">
-        <li><a href="about.html">회사소개</a>
+        <li class="has-drop">
+          <a href="about.html">회사소개</a>
           <div class="dropdown small">
-            <a href="#tab1">인사말</a>
-            <a href="#tab7">오시는 길</a>
+            <div class="drop-col">
+              <a href="about.html#tab1">인사말</a>
+              <a href="about.html#tab2">CI</a>
+              <a href="about.html#tab3">조직도</a>
+              <a href="about.html#tab4">경영목표</a>
+              <a href="about.html#tab5">회사연혁</a>
+              <a href="about.html#tab6">특허·인증서</a>
+              <a href="about.html#tab7">오시는 길</a>
+            </div>
           </div>
         </li>
-        <li><a href="business.html">사업분야</a></li>
-        <li><a href="products.html">제품소개</a></li>
-        <li><a href="rnd.html">연구개발</a></li>
-        <li><a href="support.html">고객센터</a></li>
+
+        <li class="has-drop">
+          <a href="business.html">사업분야</a>
+          <div class="dropdown small">
+            <div class="drop-col">
+              <a href="business.html#tab1">클린룸 시스템</a>
+              <a href="business.html#tab2">항온항습 시스템</a>
+              <a href="business.html#tab3">제습 시스템</a>
+              <a href="business.html#tab4">냉동 공조 시스템</a>
+            </div>
+          </div>
+        </li>
+
+        <li class="has-drop">
+          <a href="products.html">제품소개</a>
+          <div class="dropdown small">
+            <div class="drop-col">
+              <a href="products.html#tab1">공기조화기(AHU)</a>
+              <a href="products.html#tab2">항온항습기</a>
+              <a href="products.html#tab3">건식제습기</a>
+              <a href="products.html#tab4">CR장비</a>
+            </div>
+          </div>
+        </li>
+
+        <li class="has-drop">
+          <a href="rnd.html">연구개발</a>
+          <div class="dropdown small">
+            <div class="drop-col">
+              <a href="rnd.html#tab1">연구개발 현황</a>
+              <a href="rnd.html#tab2">기술 보유 현황</a>
+            </div>
+          </div>
+        </li>
+
+        <li class="has-drop">
+          <a href="support.html">고객센터</a>
+          <div class="dropdown small">
+            <div class="drop-col">
+              <a href="support.html#tab1">공지사항</a>
+              <a href="support.html#tab2">온라인 문의</a>
+              <a href="support.html#tab3">제품 카탈로그</a>
+              <a href="support.html#tab4">설치 및 A/S</a>
+            </div>
+          </div>
+        </li>
       </ul>
     </nav>
   </div>
@@ -91,70 +194,237 @@ footer{background:#111;color:#bbb;margin-top:80px}
   <h1>회사소개</h1>
 </div>
 
+<!-- Tabs -->
 <div class="tab-menu">
   <ul>
-    <li class="active" onclick="showTab(1)">인사말</li>
-    <li onclick="showTab(7)">오시는 길</li>
+    <li class="active" data-tab="tab1">인사말</li>
+    <li data-tab="tab2">CI</li>
+    <li data-tab="tab3">조직도</li>
+    <li data-tab="tab4">경영목표</li>
+    <li data-tab="tab5">회사연혁</li>
+    <li data-tab="tab6">특허·인증서</li>
+    <li data-tab="tab7">오시는 길</li>
   </ul>
 </div>
 
 <div class="wrap">
 
-  <!-- 인사말 -->
+  <!-- tab1 인사말 -->
   <div id="tab1" class="content-box active">
     <div class="panel">
       <h2>인사말</h2>
-      <p>
-        SNT는 공조·제습·클린룸 설비 분야에서 축적된 기술력과 경험을 바탕으로  
-        고객 맞춤형 솔루션을 제공하는 전문 기업입니다.
-      </p>
-      <p>
-        끊임없는 연구개발과 품질 개선을 통해 신뢰받는 파트너가 되겠습니다.
-      </p>
-      <p style="margin-top:40px;font-weight:700;">대표이사 임은석</p>
+      <div class="two-col">
+        <img src="img/about_greeting.jpg" alt="인사말 이미지" onerror="this.style.display='none'">
+        <div>
+          <p>
+            SNT는 공조·제습·클린룸 설비 분야에서 축적된 기술력과 경험을 바탕으로,
+            고객 요구에 최적화된 시스템 설계/제작/시공/유지보수까지 원스톱 솔루션을 제공합니다.
+          </p>
+          <p>
+            앞으로도 품질과 신뢰를 최우선으로 하여, 안정적인 설비 운영과 에너지 효율 향상에 기여하는
+            파트너가 되겠습니다.
+          </p>
+          <p style="margin-top:26px;font-weight:900;color:#0b2c4d;">대표이사 임은석</p>
+        </div>
+      </div>
+      <div class="note">※ 이미지 파일이 없으면 자동으로 숨김 처리됩니다. (about_greeting.jpg)</div>
     </div>
   </div>
 
-  <!-- 오시는 길 -->
+  <!-- tab2 CI -->
+  <div id="tab2" class="content-box">
+    <div class="panel">
+      <h2>CI</h2>
+      <div class="two-col">
+        <img src="img/ci_logo.png" alt="SNT CI" onerror="this.style.display='none'">
+        <div>
+          <p>
+            SNT CI는 신뢰(Trust)와 기술(Technology)을 기반으로 한 지속 성장의 의미를 담고 있습니다.
+            다양한 현장 조건에서도 안정적으로 운전되는 설비와 품질 중심의 기업 문화를 지향합니다.
+          </p>
+          <div class="kpi">
+            <div class="box">
+              <div class="ttl">신뢰</div>
+              <div class="txt">정확한 사양 반영과 책임 있는 대응</div>
+            </div>
+            <div class="box">
+              <div class="ttl">기술</div>
+              <div class="txt">현장 맞춤 설계 및 제어 노하우</div>
+            </div>
+            <div class="box">
+              <div class="ttl">품질</div>
+              <div class="txt">검증된 제작 공정과 철저한 테스트</div>
+            </div>
+          </div>
+          <div class="note">※ CI 가이드(색상/규정/사용 예시)는 추후 자료 제공 시 추가 가능합니다.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- tab3 조직도 -->
+  <div id="tab3" class="content-box">
+    <div class="panel">
+      <h2>조직도</h2>
+      <div class="two-col">
+        <img src="img/about_org.png" alt="조직도" onerror="this.style.display='none'">
+        <div>
+          <p>
+            SNT는 설계/제작/시공/서비스가 유기적으로 협업하는 체계를 통해
+            프로젝트 품질과 납기를 안정적으로 관리합니다.
+          </p>
+          <ul>
+            <li><b>영업/기술</b> : 요구사항 분석, 제안/견적, 기술 협의</li>
+            <li><b>설계</b> : 시스템 설계, 도면/사양 확정, 제어 로직</li>
+            <li><b>제작</b> : 공장 제작, 품질 검사, 출하 전 테스트</li>
+            <li><b>현장/시운전</b> : 설치, 시운전, 성능 검증</li>
+            <li><b>서비스</b> : 정기 점검, 유지보수, A/S</li>
+          </ul>
+          <div class="note">※ 조직도 이미지는 제공 파일로 교체하면 됩니다. (about_org.png)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- tab4 경영목표 -->
+  <div id="tab4" class="content-box">
+    <div class="panel">
+      <h2>경영목표</h2>
+      <p>
+        SNT는 고객 요구에 맞는 최적의 솔루션 제공과 지속 가능한 운영을 위해 아래의 경영목표를 지향합니다.
+      </p>
+      <div class="kpi" style="margin-top:14px;">
+        <div class="box">
+          <div class="ttl">고객 만족</div>
+          <div class="txt">신속한 대응과 명확한 커뮤니케이션</div>
+        </div>
+        <div class="box">
+          <div class="ttl">품질 우선</div>
+          <div class="txt">표준화된 검사/테스트로 품질 안정화</div>
+        </div>
+        <div class="box">
+          <div class="ttl">기술 혁신</div>
+          <div class="txt">제어/에너지 효율 개선을 통한 경쟁력 강화</div>
+        </div>
+      </div>
+      <div class="note">※ 필요하시면 “핵심 가치/슬로건” 문구도 덕우 스타일로 맞춰 드릴 수 있어요.</div>
+    </div>
+  </div>
+
+  <!-- tab5 회사연혁 -->
+  <div id="tab5" class="content-box">
+    <div class="panel">
+      <h2>회사연혁</h2>
+      <p>주요 이력은 아래 형식으로 정리했습니다. (연도/내용은 자료 주시면 정확히 업데이트합니다)</p>
+      <ul class="timeline">
+        <li><div class="year">2025</div><div class="desc">공조·제습 설비 공급 확대 / 프로젝트 수행 역량 강화</div></li>
+        <li><div class="year">2023</div><div class="desc">클린룸 관련 솔루션 라인업 확장</div></li>
+        <li><div class="year">2021</div><div class="desc">품질/검사 체계 고도화 및 생산 공정 개선</div></li>
+        <li><div class="year">2019</div><div class="desc">주요 고객사 납품 및 시공 실적 확대</div></li>
+        <li><div class="year">설립</div><div class="desc">SNT 설립 / 기술 기반 사업 시작</div></li>
+      </ul>
+      <div class="note">※ “설립연도/주요 실적” 정보를 주시면 연혁을 사실 기반으로 정확히 채워드립니다.</div>
+    </div>
+  </div>
+
+  <!-- tab6 특허·인증서 -->
+  <div id="tab6" class="content-box">
+    <div class="panel">
+      <h2>특허·인증서</h2>
+      <p>보유 인증/특허/등록 항목을 카드 형태로 정리했습니다. (이미지/번호/발급기관 제공 시 즉시 반영)</p>
+      <div class="cert-grid">
+        <div class="cert">
+          <div class="name">인증/등록 항목 1</div>
+          <div class="meta">발급기관: -<br>번호: -<br>유효기간: -</div>
+        </div>
+        <div class="cert">
+          <div class="name">인증/등록 항목 2</div>
+          <div class="meta">발급기관: -<br>번호: -<br>유효기간: -</div>
+        </div>
+        <div class="cert">
+          <div class="name">인증/등록 항목 3</div>
+          <div class="meta">발급기관: -<br>번호: -<br>유효기간: -</div>
+        </div>
+      </div>
+      <div class="note">※ 실제 인증서 이미지가 있으면 카드 대신 “썸네일 그리드”로도 구성 가능합니다.</div>
+    </div>
+  </div>
+
+  <!-- tab7 오시는 길 -->
   <div id="tab7" class="content-box">
     <div class="panel">
       <h2>오시는 길</h2>
       <p><b>주소</b><br>경기도 화성시 마도면 청원산단5길 26</p>
 
-      <div style="margin-top:24px;">
+      <div class="map-wrap">
         <iframe
-          src="https://www.google.com/maps?q=경기도 화성시 마도면 청원산단5길 26&output=embed"
-          width="100%" height="360"
-          style="border:0;border-radius:12px"
-          loading="lazy">
-        </iframe>
+          title="SNT 위치 지도"
+          src="https://www.google.com/maps?q=경기도%20화성시%20마도면%20청원산단5길%2026&output=embed"
+          width="100%"
+          height="360"
+          style="border:0;display:block;"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
+
+      <div class="note">※ 지도는 Google 지도 embed 방식입니다. (원하시면 카카오/네이버 지도로 변경 가능)</div>
     </div>
   </div>
 
 </div>
 
-<footer>
+<footer class="site-footer">
   <div class="footer-inner">
     <div class="footer-logo">
-      <img src="img/ci_logo_white.png" alt="SNT">
+      <img src="img/ci_logo_white.png" alt="SNT 로고" onerror="this.style.display='none'">
     </div>
     <div class="footer-text">
-      <div><b>대표</b> : 임은석 | <b>주소</b> : 경기도 화성시 마도면 청원산단5길 26 | <b>사업자등록번호</b> : 134-86-70313</div>
-      <div><b>Tel</b> : 031-508-0252 | <b>Fax</b> : 031-508-0255 | <b>E-mail</b> : sntin2010@naver.com</div>
+      <div><b>대표</b> : 임은석 &nbsp; | &nbsp; <b>주소</b> : 경기도 화성시 마도면 청원산단5길 26 &nbsp; | &nbsp; <b>사업자등록번호</b> : 134-86-70313</div>
+      <div><b>Tel</b> : 031-508-0252 &nbsp; | &nbsp; <b>Fax</b> : 031-508-0255 &nbsp; | &nbsp; <b>E-mail</b> : sntin2010@naver.com</div>
       <div>Copyright © SNT Co., Ltd. All rights reserved.</div>
     </div>
   </div>
+  <div class="footer-copy"></div>
 </footer>
 
 <script>
-function showTab(n){
-  document.querySelectorAll('.content-box').forEach(b=>b.classList.remove('active'));
-  document.querySelectorAll('.tab-menu li').forEach(l=>l.classList.remove('active'));
-  document.getElementById('tab'+n).classList.add('active');
-  document.querySelectorAll('.tab-menu li')[n===1?0:1].classList.add('active');
-  window.scrollTo({top:0,behavior:'smooth'});
-}
+  function showTab(tabId){
+    document.querySelectorAll('.tab-menu li').forEach(li=>{
+      li.classList.toggle('active', li.dataset.tab===tabId);
+    });
+    document.querySelectorAll('.content-box').forEach(box=>{
+      box.classList.toggle('active', box.id===tabId);
+    });
+  }
+
+  function scrollToTop(){
+    window.scrollTo({top:0,left:0,behavior:'instant'});
+  }
+
+  function tabFromHash(){
+    const hash=(location.hash||'').replace('#','');
+    if(hash && document.getElementById(hash)){
+      showTab(hash);
+      setTimeout(scrollToTop,0);
+      return;
+    }
+    showTab('tab1');
+    setTimeout(scrollToTop,0);
+  }
+
+  document.addEventListener('DOMContentLoaded', ()=>{
+    document.querySelectorAll('.tab-menu li').forEach(li=>{
+      li.addEventListener('click', ()=>{
+        const tabId=li.dataset.tab;
+        history.replaceState(null,'','#'+tabId);
+        showTab(tabId);
+        setTimeout(scrollToTop,0);
+      });
+    });
+    tabFromHash();
+  });
+
+  window.addEventListener('hashchange', tabFromHash);
 </script>
 
 </body>
