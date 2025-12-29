@@ -46,3 +46,72 @@ async function loadNotices(listId, limit){
     console.log('공지 로드 실패', e);
   }
 }
+
+
+/* Support page: board style notice list (static site / no DB) */
+async function loadNoticeBoard(tbodyId, detailWrapId){
+  try{
+    const res = await fetch('./data/notices.json', {cache:'no-store'});
+    const arr = await res.json();
+    const tbody = document.getElementById(tbodyId);
+    if(!tbody) return;
+
+    tbody.innerHTML = '';
+
+    if(!Array.isArray(arr) || !arr.length){
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td colspan="3" style="text-align:center;color:#777;padding:18px;">등록된 공지사항이 없습니다.</td>`;
+      tbody.appendChild(tr);
+      return;
+    }
+
+    // 최신글이 위로 오도록(작성일 기준, 동일하면 기존 순서)
+    const sorted = [...arr].sort((a,b)=>{
+      const ad = (a.date || '').replace(/[^0-9]/g,'');
+      const bd = (b.date || '').replace(/[^0-9]/g,'');
+      return bd.localeCompare(ad);
+    });
+
+    sorted.forEach((n, idx)=>{
+      const tr = document.createElement('tr');
+      const no = idx + 1;
+      const title = n.title || '';
+      const date = n.date || '';
+
+      tr.innerHTML = `
+        <td class="col-no">${no}</td>
+        <td class="col-title"><a href="javascript:void(0)" class="notice-link" data-idx="${idx}">${title}</a></td>
+        <td class="col-date">${date}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+
+    // click handler
+    tbody.addEventListener('click', (e)=>{
+      const link = e.target.closest('a.notice-link');
+      if(!link) return;
+      const idx = Number(link.getAttribute('data-idx'));
+      const n = sorted[idx];
+      openNoticeDetail(n, detailWrapId);
+    }, { once:false });
+
+  }catch(e){
+    console.log('공지 게시판 로드 실패', e);
+  }
+}
+
+function openNoticeDetail(notice, detailWrapId){
+  const wrap = document.getElementById(detailWrapId);
+  if(!wrap) return;
+
+  const t = document.getElementById('noticeDetailTitle');
+  const d = document.getElementById('noticeDetailDate');
+  const c = document.getElementById('noticeDetailContent');
+
+  if(t) t.textContent = notice?.title || '';
+  if(d) d.textContent = notice?.date || '';
+  if(c) c.textContent = notice?.content || '';
+
+  wrap.hidden = false;
+  wrap.scrollIntoView({behavior:'smooth', block:'start'});
+}

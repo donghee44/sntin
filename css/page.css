@@ -1,1 +1,29 @@
 /* reserved */
+
+
+/* ===== Support: Notice Board ===== */
+.board-wrap{margin-top:18px;}
+.board-table{width:100%;border-collapse:collapse;background:#fff;}
+.board-table thead th{font-weight:700;font-size:15px;padding:14px 12px;border-bottom:2px solid #d9d9d9;}
+.board-table tbody td{padding:14px 12px;border-bottom:1px solid #e8e8e8;font-size:15px;vertical-align:middle;}
+.board-table .col-no{width:80px;text-align:center;}
+.board-table .col-date{width:160px;text-align:center;white-space:nowrap;}
+.board-table .col-title{text-align:left;}
+.board-table a.notice-link{display:block;color:inherit;text-decoration:none;}
+.board-table a.notice-link:hover{text-decoration:underline;}
+
+.notice-detail{margin-top:18px;padding:22px 20px;border:1px solid #e6e6e6;border-radius:12px;background:#fff;}
+.notice-detail-head{display:flex;gap:12px;align-items:flex-end;justify-content:space-between;border-bottom:1px solid #eee;padding-bottom:12px;margin-bottom:14px;}
+.notice-detail-head h3{margin:0;font-size:18px;line-height:1.3;}
+.notice-detail-date{font-size:14px;color:#666;white-space:nowrap;}
+.notice-detail-content{font-size:15px;line-height:1.7;color:#333;white-space:pre-line;}
+.notice-detail-actions{margin-top:18px;display:flex;justify-content:flex-end;}
+.btn-basic{border:1px solid #cfcfcf;background:#fff;border-radius:10px;padding:10px 14px;font-size:14px;cursor:pointer;}
+.btn-basic:hover{background:#f6f6f6;}
+
+@media (max-width: 640px){
+  .board-table .col-no{width:56px;}
+  .board-table .col-date{width:120px;font-size:13px;}
+  .board-table thead th,.board-table tbody td{padding:12px 10px;font-size:14px;}
+  .notice-detail{padding:18px 14px;}
+}

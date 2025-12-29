@@ -1,12 +1,13 @@
 <!DOCTYPE html>
+
 <html lang="ko"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>SNT | 고객센터</title>
-<link rel="stylesheet" href="css/common.css">
-<link rel="stylesheet" href="css/page.css">
+<link href="css/common.css" rel="stylesheet"/>
+<link href="css/page.css" rel="stylesheet"/>
 </head><body>
 <header class="site-header"><div class="header-inner">
-<a class="brand" href="index.html"><img src="img/ci_logo.png" alt="SNT CI 로고" onerror="this.style.display='none'"></a>
+<a class="brand" href="index.html"><img alt="SNT CI 로고" onerror="this.style.display='none'" src="img/ci_logo.png"/></a>
 <nav class="main-nav"><ul class="menu">
 <li class="has-drop"><a href="about.html">회사소개</a><div class="dropdown">
 <a href="about.html#tab1">인사말</a><a href="about.html#tab2">CI</a><a href="about.html#tab3">조직도</a><a href="about.html#tab4">경영목표</a><a href="about.html#tab5">회사연혁</a><a href="about.html#tab6">특허·인증서</a><a href="about.html#tab7">오시는 길</a>
@@ -25,18 +26,36 @@
 </div></li>
 </ul></nav></div></header>
 <div class="sub-visual"><h1>고객센터</h1></div>
-
-<div class="tab-menu"><ul><li class='active' data-tab='tab1'>공지사항</li><li class='' data-tab='tab2'>온라인 문의</li><li class='' data-tab='tab3'>제품 카탈로그</li><li class='' data-tab='tab4'>설치 및 A/S</li></ul></div>
-<div class="wrap"><div id='tab1' class='content-box active'><div class='panel'><h2>공지사항</h2><ul id='noticeListSupport' class='notice-list'></ul></div></div><div id='tab2' class='content-box'><div class='panel'><h2>온라인 문의</h2><p>문의사항은 아래 연락처로 접수해 주시면 신속히 안내드리겠습니다.</p><p><b>Tel</b> : 031-508-0252<br><b>Fax</b> : 031-508-0255<br><b>E-mail</b> : sntin2010@naver.com</p></div></div><div id='tab3' class='content-box'><div class='panel'><h2>제품 카탈로그</h2><p>제품 카탈로그(PDF)를 다운로드하실 수 있습니다.</p><div style='margin-top:18px;'><a class='btn' href='pdf/SNT_catalog.pdf' download>📄 카탈로그 다운로드</a></div></div></div><div id='tab4' class='content-box'><div class='panel'><h2>설치 및 A/S</h2><p>설치/점검 및 A/S 관련 문의는 아래 연락처로 접수해 주세요.</p><p><b>Tel</b> : 031-508-0252<br><b>E-mail</b> : sntin2010@naver.com</p></div></div></div>
-
+<div class="tab-menu"><ul><li class="active" data-tab="tab1">공지사항</li><li class="" data-tab="tab2">온라인 문의</li><li class="" data-tab="tab3">제품 카탈로그</li><li class="" data-tab="tab4">설치 및 A/S</li></ul></div>
+<div class="wrap"><div class="content-box active" id="tab1"><div class="panel"><h2>공지사항</h2><div class="board-wrap">
+<table aria-label="공지사항 목록" class="board-table">
+<thead>
+<tr>
+<th class="col-no">번호</th>
+<th class="col-title">제목</th>
+<th class="col-date">작성일</th>
+</tr>
+</thead>
+<tbody id="noticeBoardBody"></tbody>
+</table>
+<div class="notice-detail" hidden="" id="noticeDetail">
+<div class="notice-detail-head">
+<h3 id="noticeDetailTitle"></h3>
+<span class="notice-detail-date" id="noticeDetailDate"></span>
+</div>
+<div class="notice-detail-content" id="noticeDetailContent"></div>
+<div class="notice-detail-actions">
+<button class="btn-basic" onclick="closeNoticeDetail()" type="button">목록으로</button>
+</div>
+</div>
+</div></div></div><div class="content-box" id="tab2"><div class="panel"><h2>온라인 문의</h2><p>문의사항은 아래 연락처로 접수해 주시면 신속히 안내드리겠습니다.</p><p><b>Tel</b> : 031-508-0252<br/><b>Fax</b> : 031-508-0255<br/><b>E-mail</b> : sntin2010@naver.com</p></div></div><div class="content-box" id="tab3"><div class="panel"><h2>제품 카탈로그</h2><p>제품 카탈로그(PDF)를 다운로드하실 수 있습니다.</p><div style="margin-top:18px;"><a class="btn" download="" href="pdf/SNT_catalog.pdf">📄 카탈로그 다운로드</a></div></div></div><div class="content-box" id="tab4"><div class="panel"><h2>설치 및 A/S</h2><p>설치/점검 및 A/S 관련 문의는 아래 연락처로 접수해 주세요.</p><p><b>Tel</b> : 031-508-0252<br/><b>E-mail</b> : sntin2010@naver.com</p></div></div></div>
 <footer class="site-footer"><div class="footer-inner">
-<div class="footer-logo"><img src="img/ci_logo_white.png" alt="SNT 로고" onerror="this.style.display='none'"></div>
+<div class="footer-logo"><img alt="SNT 로고" onerror="this.style.display='none'" src="img/ci_logo_white.png"/></div>
 <div class="footer-text">
-<div><b>대표</b> : 임은석 &nbsp; | &nbsp; <b>주소</b> : 경기도 화성시 마도면 청원산단5길 26 &nbsp; | &nbsp; <b>사업자등록번호</b> : 134-86-70313</div>
-<div><b>Tel</b> : 031-508-0252 &nbsp; | &nbsp; <b>Fax</b> : 031-508-0255 &nbsp; | &nbsp; <b>E-mail</b> : sntin2010@naver.com</div>
+<div><b>대표</b> : 임은석   |   <b>주소</b> : 경기도 화성시 마도면 청원산단5길 26   |   <b>사업자등록번호</b> : 134-86-70313</div>
+<div><b>Tel</b> : 031-508-0252   |   <b>Fax</b> : 031-508-0255   |   <b>E-mail</b> : sntin2010@naver.com</div>
 <div>Copyright © SNT Co., Ltd. All rights reserved.</div>
 </div></div><div class="footer-copy"></div></footer>
-
 <script src="js/tabs.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function(){
@@ -51,5 +70,14 @@ document.addEventListener('DOMContentLoaded', function(){
 });
 window.addEventListener('hashchange', function(){ window.SNTTabs.tabFromHash('tab1'); });
 </script>
-<script src='js/notices.js'></script><script>document.addEventListener('DOMContentLoaded', function(){ loadNotices('noticeListSupport'); });</script>
-</body></html>
+<script src="js/notices.js"></script>
+<script>document.addEventListener('DOMContentLoaded', function(){
+  if(typeof loadNoticeBoard === 'function'){
+    loadNoticeBoard('noticeBoardBody','noticeDetail');
+  }
+});
+
+function closeNoticeDetail(){
+  const d = document.getElementById('noticeDetail');
+  if(d){ d.hidden = true; }
+}</script></body></html>
