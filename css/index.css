@@ -1,16 +1,125 @@
-.section-title{margin:0 0 18px;color:var(--brand);font-size:22px;font-weight:900;}
-.cs-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;align-items:start;margin-top:18px;}
-.cs-head{display:flex;justify-content:space-between;align-items:center;}
-.cs-head h2{margin:0;font-size:22px;}
-.cs-plus{width:44px;height:44px;border:0;background:transparent;font-size:34px;line-height:1;cursor:pointer;}
-.cs-actions{display:flex;flex-direction:column;gap:18px;}
-.cs-action{display:flex;align-items:center;gap:16px;padding:22px;border-radius:0;color:#fff;}
-.cs-action .cs-ico{width:54px;height:54px;display:flex;align-items:center;justify-content:center;font-size:28px;opacity:.95;}
-.cs-way{background:#0b4aa6;} .cs-catalog{background:#3a3a3a;}
-.cs-title{font-weight:800;font-size:20px;} .cs-sub{margin-top:6px;opacity:.9;font-size:14px;}
-.cs-contact-card{background:#5b8fd8;color:#fff;padding:22px;min-height:190px;position:relative;}
-.cs-contact-title{font-weight:800;font-size:18px;opacity:.95;}
-.cs-contact-tel{font-weight:900;font-size:32px;margin-top:10px;letter-spacing:-.5px;}
-.cs-contact-meta{margin-top:14px;font-size:14px;line-height:1.35;opacity:.95;}
-.cs-phone{position:absolute;right:18px;bottom:18px;font-size:44px;opacity:.55;}
-@media(max-width:960px){.cs-grid{grid-template-columns:1fr;}}
+/* Home-specific */
+
+.hero{
+  position:relative;
+  min-height:92vh;
+  background-color:#0b0c10;
+  display:flex;
+  align-items:flex-end;
+  overflow:hidden;
+}
+
+/* Sliding background layers */
+.hero-bgs{position:absolute;inset:0;z-index:0;overflow:hidden;}
+.hero-bg{
+  position:absolute;inset:0;
+  background-position:center;
+  background-size:cover;
+  background-repeat:no-repeat;
+  opacity:0;
+  transform:translateX(100%);
+  transition:transform .9s ease, opacity .9s ease;
+  will-change:transform, opacity;
+}
+.hero-bg.is-active{
+  opacity:1;
+  transform:translateX(0);
+}
+.hero-bg.is-exit{
+  opacity:1;
+  transform:translateX(-100%);
+}
+
+/* Overlay so text stays readable */
+.hero::after{
+  content:"";
+  position:absolute;inset:0;
+  z-index:1;
+  background:linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.10) 45%, rgba(0,0,0,.45));
+}
+
+.hero .wrap{
+
+  position:relative;
+  z-index:2;
+  width:100%;
+  padding-bottom:78px;
+}
+
+.hero-content{
+  transition: opacity .5s ease, transform .8s ease;
+}
+.hero.is-changing .hero-content{
+  opacity:0;
+  transform: translateX(-18px);
+}
+.hero:not(.is-changing) .hero-content{
+  opacity:1;
+  transform: translateX(0);
+}
+.hero-kicker{
+  color:rgba(255,255,255,.75);
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  font-size:12px;
+  font-weight:900;
+}
+.hero-title{
+  margin:14px 0 0;
+  color:#fff;
+  font-size:56px;
+  line-height:1.05;
+  letter-spacing:-.03em;
+  text-shadow:0 18px 60px rgba(0,0,0,.55);
+}
+.hero-sub{
+  margin:16px 0 0;
+  color:rgba(255,255,255,.82);
+  font-size:16px;
+  line-height:1.9;
+  max-width:640px;
+}
+.hero-actions{margin-top:26px;display:flex;flex-wrap:wrap;gap:12px}
+.hero-actions .btn{padding:12px 16px}
+.hero-actions .btn.btn-ghost{background:rgba(255,255,255,.10);border-color:rgba(255,255,255,.22);color:#fff}
+.hero-actions .btn.btn-ghost:hover{border-color:rgba(255,255,255,.40);color:#fff}
+
+/* slide dots */
+.hero-dots{margin-top:26px;display:flex;gap:8px}
+.hero-dot{
+  width:26px;height:4px;border-radius:999px;
+  background:rgba(255,255,255,.25);
+  border:0;cursor:pointer;
+}
+.hero-dot.active{background:#fff}
+
+/* product grid */
+.product-grid .card{grid-column:span 3}
+@media(max-width:1100px){ .product-grid .card{grid-column:span 6} }
+@media(max-width:640px){ .hero-title{font-size:38px} .product-grid .card{grid-column:span 12} }
+
+/* community block */
+.community{
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  gap:18px;
+}
+.community .notice-box{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:18px;
+}
+.community .notice-box h3{margin:0;font-size:18px}
+.community .notice-box .moreline{margin-top:10px;display:flex;justify-content:flex-end}
+.community .contact-box{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:18px;
+}
+.contact-big{font-size:28px;font-weight:900;margin:10px 0 0}
+.contact-meta{margin-top:12px;color:var(--muted);line-height:1.7;font-size:14px}
+@media(max-width:920px){ .community{grid-template-columns:1fr} }
+
+

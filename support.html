@@ -5,29 +5,54 @@
 <title>SNT | 고객센터</title>
 <link href="css/common.css" rel="stylesheet"/>
 <link href="css/page.css" rel="stylesheet"/>
-</head><body>
-<header class="site-header"><div class="header-inner">
-<a class="brand" href="index.html"><img alt="SNT CI 로고" onerror="this.style.display='none'" src="img/ci_logo.png"/></a>
-<nav class="main-nav"><ul class="menu">
-<li class="has-drop"><a href="about.html">회사소개</a><div class="dropdown">
-<a href="about.html#tab1">인사말</a><a href="about.html#tab2">CI</a><a href="about.html#tab3">조직도</a><a href="about.html#tab4">경영목표</a><a href="about.html#tab5">회사연혁</a><a href="about.html#tab6">특허·인증서</a><a href="about.html#tab7">오시는 길</a>
-</div></li>
-<li class="has-drop"><a href="business.html">사업분야</a><div class="dropdown">
-<a href="business.html#tab1">클린룸 시스템</a><a href="business.html#tab2">항온항습 시스템</a><a href="business.html#tab3">제습 시스템</a><a href="business.html#tab4">냉동 공조 시스템</a>
-</div></li>
-<li class="has-drop"><a href="products.html">제품소개</a><div class="dropdown">
-<a href="products.html#tab1">공기조화기(AHU)</a><a href="products.html#tab2">항온항습기</a><a href="products.html#tab3">건식제습기</a><a href="products.html#tab4">CR장비</a>
-</div></li>
-<li class="has-drop"><a href="rnd.html">연구개발</a><div class="dropdown">
-<a href="rnd.html#tab1">연구개발 현황</a><a href="rnd.html#tab2">기술 보유 현황</a>
-</div></li>
-<li class="has-drop"><a href="support.html">고객센터</a><div class="dropdown">
-<a href="support.html#tab1">공지사항</a><a href="support.html#tab2">온라인 문의</a><a href="support.html#tab3">제품 카탈로그</a><a href="support.html#tab4">설치 및 A/S</a>
-</div></li>
-</ul></nav></div></header>
-<div class="sub-visual"><h1>고객센터</h1></div>
+</head><body class=\"page-support\"\1>
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html">
+      <img src="img/ci_logo.png" alt="SNT CI 로고" onerror="this.style.display='none'">
+    </a>
+
+    <button class="nav-toggle" type="button" aria-label="메뉴 열기">
+      <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+    </button>
+
+    <nav class="main-nav" aria-label="주요 메뉴">
+      <ul class="menu">
+        <li class="has-drop">
+          <a href="about.html">회사소개</a>
+          <div class="dropdown">
+            <a href="about.html#tab1">인사말</a><a href="about.html#tab2">CI</a><a href="about.html#tab3">조직도</a>
+            <a href="about.html#tab4">경영목표</a><a href="about.html#tab5">회사연혁</a><a href="about.html#tab6">특허·인증서</a><a href="about.html#tab7">오시는 길</a>
+          </div>
+        </li>
+        <li class="has-drop">
+          <a href="business.html">사업분야</a>
+          <div class="dropdown"><a href="business.html#tab1">본사</a><a href="business.html#tab2">안산지사</a><a href="business.html#tab3">파주지사</a></div>
+        </li>
+        <li class="has-drop">
+          <a href="products.html">제품소개</a>
+          <div class="dropdown"><a href="products.html#tab1">공조기</a><a href="products.html#tab2">제습기</a><a href="products.html#tab3">항온항습기</a><a href="products.html#tab4">제습기유니트</a></div>
+        </li>
+        <li class="has-drop">
+          <a href="rnd.html">연구개발</a>
+          <div class="dropdown">
+            <a href="rnd.html#tab1">연구개발 현황</a><a href="rnd.html#tab2">기술 보유 현황</a>
+          </div>
+        </li>
+        <li class="has-drop">
+          <a href="support.html">고객센터</a>
+          <div class="dropdown">
+            <a href="support.html#tab1">공지사항</a><a href="support.html#tab2">온라인 문의</a><a href="support.html#tab3">제품 카탈로그</a><a href="support.html#tab4">설치 및 A/S</a>
+          </div>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<div class="top-spacer" aria-hidden="true"></div>
+<div class="sub-visual"><div class="wrap"><h1>고객센터</h1></div></div>
 <div class="tab-menu"><ul><li class="active" data-tab="tab1">공지사항</li><li class="" data-tab="tab2">온라인 문의</li><li class="" data-tab="tab3">제품 카탈로그</li><li class="" data-tab="tab4">설치 및 A/S</li></ul></div>
-<div class="wrap"><div class="content-box active" id="tab1"><div class="panel"><h2>공지사항</h2><div class="board-wrap">
+<div class="wrap page-wrap"><div class="content-box active" id="tab1"><div class="panel"><h2>공지사항</h2><div class="board-wrap">
 <table aria-label="공지사항 목록" class="board-table">
 <thead>
 <tr>
@@ -80,4 +105,5 @@ window.addEventListener('hashchange', function(){ window.SNTTabs.tabFromHash('ta
 function closeNoticeDetail(){
   const d = document.getElementById('noticeDetail');
   if(d){ d.hidden = true; }
-}</script></body></html>
+}</script><script src="js/site.js"></script>
+</body></html>
