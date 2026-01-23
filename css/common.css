@@ -350,11 +350,79 @@ body.page-support .sub-visual{background-image:url('../img/hero_2.jpg');}
   body.has-hero .nav-toggle{border-color:rgba(255,255,255,.22)}
 }
 
-/* ===== sub-visual background unified (force) ===== */
-body.page-about .sub-visual,
-body.page-business .sub-visual,
-body.page-products .sub-visual,
-body.page-rnd .sub-visual,
-body.page-support .sub-visual{
-  background-image:url('../img/hero_2.jpg') !important;
+/* ===================================================================
+   FINAL LOCK v2 – DO NOT MOVE (prevents reset issues)
+   =================================================================== */
+
+/* Header menu */
+.site-header .main-nav{
+  flex: 1 !important;
+  display: flex !important;
+  justify-content: center !important;
+}
+.site-header .main-nav .menu{
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 64px !important;
+}
+.site-header .main-nav .menu > li > a{
+  font-size: clamp(22px, 2.1vw, 30px) !important;
+  font-weight: 700 !important;
+}
+
+/* CI logo – bigger */
+.site-header .logo{
+  padding: 6px 0 !important;
+}
+.site-header .logo img{
+  height: clamp(56px, 5.2vw, 78px) !important;
+  width: auto !important;
+}
+
+/* Dropdown */
+.site-header .main-nav .dropdown a{
+  font-size: 22px !important;
+  font-weight: 600 !important;
+  padding: 14px 18px !important;
+}
+
+/* Product tabs */
+.tab-menu a,
+.tab-menu li,
+.tab-menu li a,
+.tab-menu li button,
+.tab-menu li span{
+  font-size: 24px !important;
+  font-weight: 700 !important;
+}
+
+/* Sub-visual title */
+.sub-visual{
+  position: relative !important;
+}
+.sub-visual::before{
+  content:"" !important;
+  position:absolute !important;
+  inset:0 !important;
+  background: rgba(0,0,0,0.45) !important;
+  pointer-events:none !important;
+}
+.sub-visual .wrap{
+  position: relative !important;
+  z-index: 1 !important;
+}
+.sub-visual h1,
+.sub-visual h2,
+.sub-visual .title{
+  color:#ffffff !important;
+  font-weight: 900 !important;
+  text-shadow:
+    0 2px 6px rgba(0,0,0,0.65),
+    0 10px 26px rgba(0,0,0,0.6) !important;
+  font-size: clamp(34px, 3.2vw, 46px) !important;
+}
+
+/* Mobile */
+@media (max-width: 900px){
+  .site-header .main-nav .menu{ gap: 32px !important; }
 }
