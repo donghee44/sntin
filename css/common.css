@@ -350,18 +350,11 @@ body.page-support .sub-visual{background-image:url('../img/hero_2.jpg');}
   body.has-hero .nav-toggle{border-color:rgba(255,255,255,.22)}
 }
 
-
-/* ===== Products images: fully center regardless of image aspect ===== */
-.page-products .product-media{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-.page-products .product-media img{
-  width:100%;
-  height:100%;
-  max-width:none;
-  max-height:none;
-  object-fit:contain;
-  object-position:center center;
+/* ===== sub-visual background unified (force) ===== */
+body.page-about .sub-visual,
+body.page-business .sub-visual,
+body.page-products .sub-visual,
+body.page-rnd .sub-visual,
+body.page-support .sub-visual{
+  background-image:url('../img/hero_2.jpg') !important;
 }

@@ -1,12 +1,15 @@
 /* site.js (patched)
-   - Restores HERO text rendering (reads data-hero-title/sub/bg spans)
-   - Stable slide transition using 2 background layers (hero-bgs > .hero-bg x2)
-   - Handles random dot clicks without glitch
-   - Removes '/n' and '\n' by converting to single-line spaces
+   - Header scroll + mobile nav
+   - Home HERO slider stays as-is (if present)
+   - Inner pages: prevent hash (#tabX) from landing deep in content; keep user at tab menu
 */
 document.addEventListener('DOMContentLoaded', () => {
-  // ================= Header scroll =================
+  // Prevent browser restoring a scrolled position (back/forward)
+  try { if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; } catch(e) {}
+
   const header = document.querySelector('.site-header');
+  const HEADER_OFFSET = 92;
+
   const onScroll = () => {
     if (!header) return;
     if (window.scrollY > 10) header.classList.add('scrolled');
@@ -15,210 +18,187 @@ document.addEventListener('DOMContentLoaded', () => {
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
 
-  // ================= Mobile nav toggle =================
+  // Mobile nav
   const navToggle = document.querySelector('.nav-toggle');
   const mainNav = document.querySelector('.main-nav');
   if (navToggle && mainNav) {
-    navToggle.addEventListener('click', () => {
-      document.body.classList.toggle('nav-open');
-    });
-    // click outside menu to close (mobile overlay)
-    mainNav.addEventListener('click', (e) => {
-      if (e.target === mainNav) document.body.classList.remove('nav-open');
-    });
+    navToggle.addEventListener('click', () => document.body.classList.toggle('nav-open'));
+    mainNav.addEventListener('click', (e) => { if (e.target === mainNav) document.body.classList.remove('nav-open'); });
   }
 
-  // ================= HERO slider =================
+  // === Home HERO slider (existing structure) ===
   const hero = document.querySelector('.hero[data-hero="slides"]');
-  if (!hero) return;
+  if (hero) {
+    const titleEl = hero.querySelector('.hero-title');
+    const subEl   = hero.querySelector('.hero-sub');
+    const dots    = Array.from(hero.querySelectorAll('.hero-dot'));
 
-  const titleEl = hero.querySelector('.hero-title');
-  const subEl   = hero.querySelector('.hero-sub');
-  const dots    = Array.from(hero.querySelectorAll('.hero-dot'));
+    const titleNodes = Array.from(hero.querySelectorAll('[data-hero-title]'));
+    const subNodes   = Array.from(hero.querySelectorAll('[data-hero-sub]'));
+    const bgNodes    = Array.from(hero.querySelectorAll('[data-hero-bg]'));
 
-  const titleNodes = Array.from(hero.querySelectorAll('[data-hero-title]'));
-  const subNodes   = Array.from(hero.querySelectorAll('[data-hero-sub]'));
-  const bgNodes    = Array.from(hero.querySelectorAll('[data-hero-bg]'));
+    const slidesCount = Math.min(titleNodes.length, subNodes.length, bgNodes.length);
+    if (slidesCount) {
+      const cleanOneLine = (s) => (s || "")
+        .replace(/(\/n|\\n|\r?\n)/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
 
-  const slidesCount = Math.min(titleNodes.length, subNodes.length, bgNodes.length);
-  if (!slidesCount) return;
+      const titles = [];
+      const subs   = [];
+      const bgs    = [];
+      for (let i = 0; i < slidesCount; i++) {
+        titles.push(cleanOneLine(titleNodes[i].getAttribute('data-hero-title')));
+        subs.push(cleanOneLine(subNodes[i].getAttribute('data-hero-sub')));
+        bgs.push((bgNodes[i].getAttribute('data-hero-bg') || "").trim());
+      }
 
-  const titles = [];
-  const subs   = [];
-  const bgs    = [];
+      const bgLayers = Array.from(hero.querySelectorAll('.hero-bgs .hero-bg'));
+      const hasTwoLayers = bgLayers.length >= 2;
 
-  const cleanOneLine = (s) => (s || "")
-    // turn /n, \n, real newline into spaces (single-line intent)
-    .replace(/(\/n|\\n|\r?\n)/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
+      if (hasTwoLayers) {
+        bgLayers.forEach((layer, idx) => {
+          layer.style.backgroundSize = 'cover';
+          layer.style.backgroundPosition = 'center';
+          layer.style.backgroundRepeat = 'no-repeat';
+          layer.style.position = 'absolute';
+          layer.style.inset = '0';
+          layer.style.willChange = 'transform, opacity';
+          layer.style.transition = 'transform 700ms ease, opacity 700ms ease';
+          layer.style.opacity = (idx === 0 ? '1' : '0');
+          layer.style.transform = 'translateX(0)';
+        });
+      }
 
-  for (let i = 0; i < slidesCount; i++) {
-    titles.push(cleanOneLine(titleNodes[i].getAttribute('data-hero-title')));
-    subs.push(cleanOneLine(subNodes[i].getAttribute('data-hero-sub')));
-    bgs.push((bgNodes[i].getAttribute('data-hero-bg') || "").trim());
-  }
+      let current = 0;
+      let activeLayer = 0;
+      let timer = null;
+      let isAnimating = false;
+      let queuedTarget = null;
 
-  const bgLayers = Array.from(hero.querySelectorAll('.hero-bgs .hero-bg'));
-  const hasTwoLayers = bgLayers.length >= 2;
+      const renderText = (i) => {
+        if (titleEl) titleEl.textContent = titles[i] || "";
+        if (subEl) subEl.textContent = subs[i] || "";
+      };
+      const setDots = (i) => dots.forEach((d, idx) => d.classList.toggle('active', idx === i));
 
-  // Ensure layers are ready (inline safety styles so black screen won't happen)
-  if (hasTwoLayers) {
-    bgLayers.forEach((layer, idx) => {
-      layer.style.backgroundSize = 'cover';
-      layer.style.backgroundPosition = 'center';
-      layer.style.backgroundRepeat = 'no-repeat';
-      layer.style.position = 'absolute';
-      layer.style.inset = '0';
-      layer.style.willChange = 'transform, opacity';
-      layer.style.transition = 'transform 700ms ease, opacity 700ms ease';
-      layer.style.opacity = (idx === 0 ? '1' : '0');
-      layer.style.transform = 'translateX(0)';
-    });
-  }
+      const setBgInstant = (i) => {
+        if (!hasTwoLayers) {
+          hero.style.backgroundImage = bgs[i] ? `url('${bgs[i]}')` : 'none';
+          hero.style.backgroundSize = 'cover';
+          hero.style.backgroundPosition = 'center';
+          return;
+        }
+        bgLayers[activeLayer].style.backgroundImage = bgs[i] ? `url('${bgs[i]}')` : 'none';
+        bgLayers[activeLayer].style.opacity = '1';
+        bgLayers[activeLayer].style.transform = 'translateX(0)';
+        const other = 1 - activeLayer;
+        bgLayers[other].style.opacity = '0';
+        bgLayers[other].style.transform = 'translateX(0)';
+      };
 
-  let current = 0;
-  let activeLayer = 0; // 0 or 1
-  let timer = null;
-  let isAnimating = false;
-  let queuedTarget = null;
+      const goTo = (target) => {
+        if (target === current) return;
+        if (isAnimating) { queuedTarget = target; return; }
+        if (!hasTwoLayers) {
+          current = target; renderText(current); setDots(current); setBgInstant(current); return;
+        }
 
-  const renderText = (i) => {
-    if (titleEl) titleEl.textContent = titles[i] || "";
-    if (subEl) subEl.textContent = subs[i] || "";
-  };
+        isAnimating = true;
+        queuedTarget = null;
 
-  const setDots = (i) => {
-    dots.forEach((d, idx) => d.classList.toggle('active', idx === i));
-  };
+        const dir = (target > current) ? 1 : -1;
+        const fromLayer = bgLayers[activeLayer];
+        const toLayerIndex = 1 - activeLayer;
+        const toLayer = bgLayers[toLayerIndex];
 
-  const setBgInstant = (i) => {
-    if (!hasTwoLayers) {
-      // fallback: set hero background
-      hero.style.backgroundImage = bgs[i] ? `url('${bgs[i]}')` : 'none';
-      hero.style.backgroundSize = 'cover';
-      hero.style.backgroundPosition = 'center';
-      return;
-    }
-    bgLayers[activeLayer].style.backgroundImage = bgs[i] ? `url('${bgs[i]}')` : 'none';
-    bgLayers[activeLayer].style.opacity = '1';
-    bgLayers[activeLayer].style.transform = 'translateX(0)';
-    const other = 1 - activeLayer;
-    bgLayers[other].style.opacity = '0';
-    bgLayers[other].style.transform = 'translateX(0)';
-  };
+        toLayer.style.transition = 'none';
+        toLayer.style.backgroundImage = bgs[target] ? `url('${bgs[target]}')` : 'none';
+        toLayer.style.opacity = '1';
+        toLayer.style.transform = `translateX(${dir * 18}%)`;
+        void toLayer.offsetWidth;
 
-  const goTo = (target, opts = {}) => {
-    const { instant = false } = opts;
-    if (target === current) return;
+        toLayer.style.transition = 'transform 700ms ease, opacity 700ms ease';
+        fromLayer.style.transition = 'transform 700ms ease, opacity 700ms ease';
 
-    if (isAnimating && !instant) {
-      queuedTarget = target;
-      return;
-    }
+        renderText(target);
+        setDots(target);
 
-    if (instant || !hasTwoLayers) {
-      current = target;
+        requestAnimationFrame(() => {
+          toLayer.style.transform = 'translateX(0)';
+          fromLayer.style.transform = `translateX(${-dir * 18}%)`;
+          fromLayer.style.opacity = '0';
+        });
+
+        let ended = false;
+        const endOnce = () => {
+          if (ended) return;
+          ended = true;
+          toLayer.removeEventListener('transitionend', endOnce);
+
+          fromLayer.style.transition = 'none';
+          fromLayer.style.transform = 'translateX(0)';
+          fromLayer.style.opacity = '0';
+          toLayer.style.opacity = '1';
+          toLayer.style.transform = 'translateX(0)';
+          activeLayer = toLayerIndex;
+          current = target;
+
+          requestAnimationFrame(() => {
+            fromLayer.style.transition = 'transform 700ms ease, opacity 700ms ease';
+          });
+
+          isAnimating = false;
+          if (queuedTarget !== null && queuedTarget !== current) {
+            const q = queuedTarget; queuedTarget = null; goTo(q);
+          }
+        };
+
+        toLayer.addEventListener('transitionend', endOnce);
+        setTimeout(endOnce, 900);
+      };
+
+      const startAuto = () => {
+        stopAuto();
+        timer = setInterval(() => goTo((current + 1) % slidesCount), 5000);
+      };
+      const stopAuto = () => { if (timer) clearInterval(timer); timer = null; };
+
       renderText(current);
       setDots(current);
       setBgInstant(current);
-      return;
-    }
-
-    isAnimating = true;
-    queuedTarget = null;
-
-    // determine direction (slide)
-    const dir = (target > current) ? 1 : -1; // 1: next comes from right, -1: from left
-
-    const fromLayer = bgLayers[activeLayer];
-    const toLayerIndex = 1 - activeLayer;
-    const toLayer = bgLayers[toLayerIndex];
-
-    // prepare next layer offscreen
-    toLayer.style.transition = 'none';
-    toLayer.style.backgroundImage = bgs[target] ? `url('${bgs[target]}')` : 'none';
-    toLayer.style.opacity = '1';
-    toLayer.style.transform = `translateX(${dir * 18}%)`; // subtle slide distance
-    // force reflow
-    void toLayer.offsetWidth;
-
-    // animate both
-    toLayer.style.transition = 'transform 700ms ease, opacity 700ms ease';
-    fromLayer.style.transition = 'transform 700ms ease, opacity 700ms ease';
-
-    // text update slightly after start (keeps motion natural)
-    renderText(target);
-    setDots(target);
-
-    requestAnimationFrame(() => {
-      toLayer.style.transform = 'translateX(0)';
-      fromLayer.style.transform = `translateX(${-dir * 18}%)`;
-      fromLayer.style.opacity = '0';
-    });
-
-    const onEnd = () => {
-      // finalize
-      fromLayer.style.transition = 'none';
-      fromLayer.style.transform = 'translateX(0)';
-      fromLayer.style.opacity = '0';
-      // keep active layer visible
-      toLayer.style.opacity = '1';
-      toLayer.style.transform = 'translateX(0)';
-      activeLayer = toLayerIndex;
-      current = target;
-
-      // restore transitions
-      requestAnimationFrame(() => {
-        fromLayer.style.transition = 'transform 700ms ease, opacity 700ms ease';
-      });
-
-      isAnimating = false;
-
-      if (queuedTarget !== null && queuedTarget !== current) {
-        const q = queuedTarget;
-        queuedTarget = null;
-        goTo(q);
-      }
-    };
-
-    // transitionend can fire twice (transform + opacity). Use a single timer guard.
-    let ended = false;
-    const endOnce = () => {
-      if (ended) return;
-      ended = true;
-      toLayer.removeEventListener('transitionend', endOnce);
-      onEnd();
-    };
-    toLayer.addEventListener('transitionend', endOnce);
-    // hard fallback
-    setTimeout(endOnce, 900);
-  };
-
-  const startAuto = () => {
-    stopAuto();
-    timer = setInterval(() => {
-      const next = (current + 1) % slidesCount;
-      goTo(next);
-    }, 5000);
-  };
-  const stopAuto = () => {
-    if (timer) clearInterval(timer);
-    timer = null;
-  };
-
-  // init
-  renderText(current);
-  setDots(current);
-  setBgInstant(current);
-  startAuto();
-
-  // dots click (random jump)
-  dots.forEach((dot, idx) => {
-    dot.addEventListener('click', () => {
-      stopAuto();
-      goTo(idx);
       startAuto();
+
+      dots.forEach((dot, idx) => {
+        dot.addEventListener('click', () => { stopAuto(); goTo(idx); startAuto(); });
+      });
+    }
+  }
+
+  // === Inner pages: after everything loads, force position to tab menu/top ===
+  if (!document.body.classList.contains('has-hero')) {
+    const tabMenu = document.querySelector('.tab-menu');
+    const hash = (location.hash || '').trim();
+
+    const snapToMenu = () => {
+      if (!tabMenu) return;
+      const y = tabMenu.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET;
+      window.scrollTo({ top: Math.max(0, y), left: 0, behavior: 'auto' });
+    };
+
+    window.addEventListener('load', () => {
+      // If no hash, always top
+      if (!hash) {
+        window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+        return;
+      }
+      // If hash is tab, land at menu (not deep in content)
+      if (/^#tab\d+$/.test(hash)) {
+        // run twice to win against any other scripts that scroll
+        snapToMenu();
+        setTimeout(snapToMenu, 30);
+        setTimeout(snapToMenu, 120);
+      }
     });
-  });
+  }
 });
