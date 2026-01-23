@@ -351,19 +351,17 @@ body.page-support .sub-visual{background-image:url('../img/hero_2.jpg');}
 }
 
 
-/* ===== Main/Home products grid: unify image layout ===== */
-.product-grid .media{
-  display:block;
-  width:100%;
-  aspect-ratio: 16 / 9;
-  border-radius: 18px;
-  overflow:hidden;
-  background:#fff;
+/* ===== Products images: fully center regardless of image aspect ===== */
+.page-products .product-media{
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
-.product-grid .media img{
+.page-products .product-media img{
   width:100%;
   height:100%;
-  display:block;
-  object-fit: cover;
-  object-position: center center;
+  max-width:none;
+  max-height:none;
+  object-fit:contain;
+  object-position:center center;
 }
