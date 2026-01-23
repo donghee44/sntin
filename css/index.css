@@ -3,59 +3,23 @@
 .hero{
   position:relative;
   min-height:92vh;
+  background:url('../img/hero_1.jpg') center/cover no-repeat;
   background-color:#0b0c10;
   display:flex;
   align-items:flex-end;
-  overflow:hidden;
 }
-
-/* Sliding background layers */
-.hero-bgs{position:absolute;inset:0;z-index:0;overflow:hidden;}
-.hero-bg{
-  position:absolute;inset:0;
-  background-position:center;
-  background-size:cover;
-  background-repeat:no-repeat;
-  opacity:0;
-  transform:translateX(100%);
-  transition:transform .9s ease, opacity .9s ease;
-  will-change:transform, opacity;
-}
-.hero-bg.is-active{
-  opacity:1;
-  transform:translateX(0);
-}
-.hero-bg.is-exit{
-  opacity:1;
-  transform:translateX(-100%);
-}
-
-/* Overlay so text stays readable */
 .hero::after{
   content:"";
   position:absolute;inset:0;
-  z-index:1;
+  /* Overlay sits BEHIND text so the headline stays bright */
+  z-index:0;
   background:linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.10) 45%, rgba(0,0,0,.45));
 }
-
 .hero .wrap{
-
   position:relative;
-  z-index:2;
+  z-index:1;
   width:100%;
   padding-bottom:78px;
-}
-
-.hero-content{
-  transition: opacity .5s ease, transform .8s ease;
-}
-.hero.is-changing .hero-content{
-  opacity:0;
-  transform: translateX(-18px);
-}
-.hero:not(.is-changing) .hero-content{
-  opacity:1;
-  transform: translateX(0);
 }
 .hero-kicker{
   color:rgba(255,255,255,.75);
@@ -123,3 +87,41 @@
 @media(max-width:920px){ .community{grid-template-columns:1fr} }
 
 
+/* hero text transition */
+.hero.is-changing .hero-content{opacity:0; transform:translateY(8px)}
+
+/* ===== Infinite Track Hero (optional enhancement) ===== */
+/* If the hero is built with a track/viewport structure, these styles apply.
+   They are additive and won't break the original single-background hero. */
+
+.hero{ overflow:hidden; }
+
+.hero-viewport{
+  position:absolute;
+  inset:0;
+  overflow:hidden;
+  z-index:0; /* behind content */
+}
+
+.hero-track{
+  height:100%;
+  display:flex;
+  transition:transform .8s ease;
+  will-change:transform;
+}
+
+.hero-track.no-transition{ transition:none; }
+
+.hero-slide{
+  min-width:100%;
+  height:100%;
+  background-size:cover;
+  background-position:center;
+}
+
+.hero .wrap,
+.hero .hero-inner,
+.hero .hero-content{
+  position:relative;
+  z-index:2; /* above slides & overlay */
+}

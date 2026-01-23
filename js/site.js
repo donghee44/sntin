@@ -1,133 +1,224 @@
-(function(){
-  function qs(sel, root){ return (root||document).querySelector(sel); }
-  function qsa(sel, root){ return Array.from((root||document).querySelectorAll(sel)); }
+/* site.js (patched)
+   - Restores HERO text rendering (reads data-hero-title/sub/bg spans)
+   - Stable slide transition using 2 background layers (hero-bgs > .hero-bg x2)
+   - Handles random dot clicks without glitch
+   - Removes '/n' and '\n' by converting to single-line spaces
+*/
+document.addEventListener('DOMContentLoaded', () => {
+  // ================= Header scroll =================
+  const header = document.querySelector('.site-header');
+  const onScroll = () => {
+    if (!header) return;
+    if (window.scrollY > 10) header.classList.add('scrolled');
+    else header.classList.remove('scrolled');
+  };
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
 
-  // Mobile nav toggle
-  const toggle = qs('.nav-toggle');
-  const nav = qs('.main-nav');
-  if(toggle && nav){
-    toggle.addEventListener('click', function(){
+  // ================= Mobile nav toggle =================
+  const navToggle = document.querySelector('.nav-toggle');
+  const mainNav = document.querySelector('.main-nav');
+  if (navToggle && mainNav) {
+    navToggle.addEventListener('click', () => {
       document.body.classList.toggle('nav-open');
     });
-    nav.addEventListener('click', function(e){
-      // close when clicking backdrop
-      if(e.target === nav){ document.body.classList.remove('nav-open'); }
-    });
-    // close on link click (mobile)
-    qsa('.menu a', nav).forEach(a=>{
-      a.addEventListener('click', ()=> document.body.classList.remove('nav-open'));
+    // click outside menu to close (mobile overlay)
+    mainNav.addEventListener('click', (e) => {
+      if (e.target === mainNav) document.body.classList.remove('nav-open');
     });
   }
 
-  // Header scroll behavior (home)
-  const header = qs('.site-header');
-  function onScroll(){
-    if(!header) return;
-    if(window.scrollY > 24) header.classList.add('scrolled');
-    else header.classList.remove('scrolled');
+  // ================= HERO slider =================
+  const hero = document.querySelector('.hero[data-hero="slides"]');
+  if (!hero) return;
+
+  const titleEl = hero.querySelector('.hero-title');
+  const subEl   = hero.querySelector('.hero-sub');
+  const dots    = Array.from(hero.querySelectorAll('.hero-dot'));
+
+  const titleNodes = Array.from(hero.querySelectorAll('[data-hero-title]'));
+  const subNodes   = Array.from(hero.querySelectorAll('[data-hero-sub]'));
+  const bgNodes    = Array.from(hero.querySelectorAll('[data-hero-bg]'));
+
+  const slidesCount = Math.min(titleNodes.length, subNodes.length, bgNodes.length);
+  if (!slidesCount) return;
+
+  const titles = [];
+  const subs   = [];
+  const bgs    = [];
+
+  const cleanOneLine = (s) => (s || "")
+    // turn /n, \n, real newline into spaces (single-line intent)
+    .replace(/(\/n|\\n|\r?\n)/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  for (let i = 0; i < slidesCount; i++) {
+    titles.push(cleanOneLine(titleNodes[i].getAttribute('data-hero-title')));
+    subs.push(cleanOneLine(subNodes[i].getAttribute('data-hero-sub')));
+    bgs.push((bgNodes[i].getAttribute('data-hero-bg') || "").trim());
   }
-  window.addEventListener('scroll', onScroll, {passive:true});
-  onScroll();
 
-  // Home hero slider (text + background)
-  const hero = qs('.hero[data-hero="slides"]');
-  if(hero){
-    const titles = qsa('[data-hero-title]', hero).map(el => el.getAttribute('data-hero-title') || '');
-    const subs   = qsa('[data-hero-sub]', hero).map(el => el.getAttribute('data-hero-sub') || '');
-    const bgs    = qsa('[data-hero-bg]', hero).map(el => el.getAttribute('data-hero-bg') || '');
+  const bgLayers = Array.from(hero.querySelectorAll('.hero-bgs .hero-bg'));
+  const hasTwoLayers = bgLayers.length >= 2;
 
-    const titleEl = qs('.hero-title', hero);
-    const subEl   = qs('.hero-sub', hero);
-    const dots    = qsa('.hero-dot', hero);
-
-    const layers = qsa('.hero-bg', hero);
-
-    // normalize linebreak markers so it stays single-line (remove /n, \n, real newlines)
-    function oneLine(s){
-      return String(s || '')
-        .replace(/\\n|\/n|\r?\n/g, ' ')
-        .replace(/\s+/g,' ')
-        .trim();
-    }
-
-    let idx = 0;
-    let timer = null;
-
-    function setBg(i, immediate){
-      const bg = (bgs[i] || bgs[0] || '').trim();
-      if(!bg || layers.length === 0) return;
-
-      if(layers.length === 1){
-        layers[0].style.backgroundImage = `url('${bg}')`;
-        layers[0].classList.add('is-active');
-        return;
-      }
-
-      const active = layers.find(l => l.classList.contains('is-active')) || layers[0];
-      const next   = layers.find(l => l !== active) || layers[1];
-
-      if(immediate){
-        layers.forEach(l => l.classList.remove('is-active','is-exit'));
-        layers[0].style.backgroundImage = `url('${bg}')`;
-        layers[0].classList.add('is-active');
-        return;
-      }
-
-      // prepare next layer from right
-      next.classList.remove('is-exit','is-active');
-      next.style.backgroundImage = `url('${bg}')`;
-      // force reflow for transition
-      void next.offsetWidth;
-      next.classList.add('is-active');
-
-      // move current out to left
-      active.classList.add('is-exit');
-
-      window.clearTimeout(hero._bgT);
-      hero._bgT = window.setTimeout(()=>{
-        active.classList.remove('is-active','is-exit');
-      }, 950);
-    }
-
-    function setText(i){
-      if(titleEl) titleEl.textContent = oneLine(titles[i] || '');
-      if(subEl)   subEl.textContent   = oneLine(subs[i]   || '');
-      dots.forEach((d,k)=> d.classList.toggle('active', k===i));
-    }
-
-    function render(i, immediate){
-      const count = Math.max(titles.length, subs.length, bgs.length, 1);
-      idx = ((i % count) + count) % count;
-
-      if(immediate){
-        hero.classList.remove('is-changing');
-        setText(idx);
-        setBg(idx, true);
-        return;
-      }
-
-      hero.classList.add('is-changing');
-      window.clearTimeout(hero._t);
-      hero._t = window.setTimeout(()=>{
-        setText(idx);
-        setBg(idx, false);
-        hero.classList.remove('is-changing');
-      }, 260);
-    }
-
-    function next(){
-      render(idx + 1, false);
-    }
-
-    // dots click
-    dots.forEach((d,k)=> d.addEventListener('click', ()=>{
-      window.clearInterval(timer);
-      render(k, false);
-      timer = window.setInterval(next, 5200);
-    }));
-
-    // init (important: set first background immediately to avoid black screen)
-    render(0, true);
-    timer = window.setInterval(next, 5200);
+  // Ensure layers are ready (inline safety styles so black screen won't happen)
+  if (hasTwoLayers) {
+    bgLayers.forEach((layer, idx) => {
+      layer.style.backgroundSize = 'cover';
+      layer.style.backgroundPosition = 'center';
+      layer.style.backgroundRepeat = 'no-repeat';
+      layer.style.position = 'absolute';
+      layer.style.inset = '0';
+      layer.style.willChange = 'transform, opacity';
+      layer.style.transition = 'transform 700ms ease, opacity 700ms ease';
+      layer.style.opacity = (idx === 0 ? '1' : '0');
+      layer.style.transform = 'translateX(0)';
+    });
   }
-})();
+
+  let current = 0;
+  let activeLayer = 0; // 0 or 1
+  let timer = null;
+  let isAnimating = false;
+  let queuedTarget = null;
+
+  const renderText = (i) => {
+    if (titleEl) titleEl.textContent = titles[i] || "";
+    if (subEl) subEl.textContent = subs[i] || "";
+  };
+
+  const setDots = (i) => {
+    dots.forEach((d, idx) => d.classList.toggle('active', idx === i));
+  };
+
+  const setBgInstant = (i) => {
+    if (!hasTwoLayers) {
+      // fallback: set hero background
+      hero.style.backgroundImage = bgs[i] ? `url('${bgs[i]}')` : 'none';
+      hero.style.backgroundSize = 'cover';
+      hero.style.backgroundPosition = 'center';
+      return;
+    }
+    bgLayers[activeLayer].style.backgroundImage = bgs[i] ? `url('${bgs[i]}')` : 'none';
+    bgLayers[activeLayer].style.opacity = '1';
+    bgLayers[activeLayer].style.transform = 'translateX(0)';
+    const other = 1 - activeLayer;
+    bgLayers[other].style.opacity = '0';
+    bgLayers[other].style.transform = 'translateX(0)';
+  };
+
+  const goTo = (target, opts = {}) => {
+    const { instant = false } = opts;
+    if (target === current) return;
+
+    if (isAnimating && !instant) {
+      queuedTarget = target;
+      return;
+    }
+
+    if (instant || !hasTwoLayers) {
+      current = target;
+      renderText(current);
+      setDots(current);
+      setBgInstant(current);
+      return;
+    }
+
+    isAnimating = true;
+    queuedTarget = null;
+
+    // determine direction (slide)
+    const dir = (target > current) ? 1 : -1; // 1: next comes from right, -1: from left
+
+    const fromLayer = bgLayers[activeLayer];
+    const toLayerIndex = 1 - activeLayer;
+    const toLayer = bgLayers[toLayerIndex];
+
+    // prepare next layer offscreen
+    toLayer.style.transition = 'none';
+    toLayer.style.backgroundImage = bgs[target] ? `url('${bgs[target]}')` : 'none';
+    toLayer.style.opacity = '1';
+    toLayer.style.transform = `translateX(${dir * 18}%)`; // subtle slide distance
+    // force reflow
+    void toLayer.offsetWidth;
+
+    // animate both
+    toLayer.style.transition = 'transform 700ms ease, opacity 700ms ease';
+    fromLayer.style.transition = 'transform 700ms ease, opacity 700ms ease';
+
+    // text update slightly after start (keeps motion natural)
+    renderText(target);
+    setDots(target);
+
+    requestAnimationFrame(() => {
+      toLayer.style.transform = 'translateX(0)';
+      fromLayer.style.transform = `translateX(${-dir * 18}%)`;
+      fromLayer.style.opacity = '0';
+    });
+
+    const onEnd = () => {
+      // finalize
+      fromLayer.style.transition = 'none';
+      fromLayer.style.transform = 'translateX(0)';
+      fromLayer.style.opacity = '0';
+      // keep active layer visible
+      toLayer.style.opacity = '1';
+      toLayer.style.transform = 'translateX(0)';
+      activeLayer = toLayerIndex;
+      current = target;
+
+      // restore transitions
+      requestAnimationFrame(() => {
+        fromLayer.style.transition = 'transform 700ms ease, opacity 700ms ease';
+      });
+
+      isAnimating = false;
+
+      if (queuedTarget !== null && queuedTarget !== current) {
+        const q = queuedTarget;
+        queuedTarget = null;
+        goTo(q);
+      }
+    };
+
+    // transitionend can fire twice (transform + opacity). Use a single timer guard.
+    let ended = false;
+    const endOnce = () => {
+      if (ended) return;
+      ended = true;
+      toLayer.removeEventListener('transitionend', endOnce);
+      onEnd();
+    };
+    toLayer.addEventListener('transitionend', endOnce);
+    // hard fallback
+    setTimeout(endOnce, 900);
+  };
+
+  const startAuto = () => {
+    stopAuto();
+    timer = setInterval(() => {
+      const next = (current + 1) % slidesCount;
+      goTo(next);
+    }, 5000);
+  };
+  const stopAuto = () => {
+    if (timer) clearInterval(timer);
+    timer = null;
+  };
+
+  // init
+  renderText(current);
+  setDots(current);
+  setBgInstant(current);
+  startAuto();
+
+  // dots click (random jump)
+  dots.forEach((dot, idx) => {
+    dot.addEventListener('click', () => {
+      stopAuto();
+      goTo(idx);
+      startAuto();
+    });
+  });
+});

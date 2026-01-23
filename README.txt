@@ -1,5 +1,10 @@
-이 ZIP에는 공지사항 연동을 위해 변경/추가되는 파일만 포함되어 있습니다.
-포함 파일:
- - data/notices.json (공지 데이터 원본)
 
-index.html / support.html 에는 안내된 스크립트와 UL만 추가하면 됩니다.
+적용 구조 요약:
+- hero-viewport (overflow hidden)
+- hero-track (flex, translateX 이동)
+- 양쪽에 clone 슬라이드 포함
+
+[clone, 1, 2, 3, clone]
+
+index.html 구조만 맞추고
+css/index.css, js/site.js 덮어쓰면 됩니다.
