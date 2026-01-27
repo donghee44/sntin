@@ -6,7 +6,7 @@
     document.querySelectorAll('.content-box').forEach(function(b){
       b.classList.toggle('active', b.id === id);
     });
-    window.scrollTo({top:0,left:0,behavior:'instant'});
+    window.scrollTo({top:0,left:0,behavior:'auto'});
   }
   function tabFromHash(def){
     var h = (location.hash||'').replace('#','');

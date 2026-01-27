@@ -1,200 +1,183 @@
 <!DOCTYPE html>
+
 <html lang="ko">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>SNT | Speed &amp; Technology</title>
-<link rel="stylesheet" href="css/common.css">
-<link rel="stylesheet" href="css/index.css">
+<link href="css/common.css" rel="stylesheet"/>
+<link href="css/index.css" rel="stylesheet"/>
 </head>
 <body class="has-hero">
+<div id="site-header">
 <header class="site-header">
-  <div class="header-inner">
-    <a class="brand" href="index.html">
-      <img src="img/ci_logo.png" alt="SNT CI 로고" onerror="this.style.display='none'">
-    </a>
-
-    <button class="nav-toggle" type="button" aria-label="메뉴 열기">
-      <span class="bar"></span><span class="bar"></span><span class="bar"></span>
-    </button>
-
-    <nav class="main-nav" aria-label="주요 메뉴">
-      <ul class="menu">
-  <li class="has-dropdown">
-    <a href="about.html">회사소개</a>
-    <div class="dropdown">
-      <a href="about.html#tab1">인사말</a>
-      <a href="about.html#tab2">CI</a>
-      <a href="about.html#tab3">조직도</a>
-      <a href="about.html#tab4">경영목표</a>
-      <a href="about.html#tab5">회사연혁</a>
-      <a href="about.html#tab6">특허·인증서</a>
-      <a href="about.html#tab7">오시는 길</a>
-    </div>
-  </li>
-
-  <li class="has-dropdown">
-    <a href="products.html">제품소개</a>
-    <div class="dropdown">
-      <a href="products.html#tab1">공조기</a>
-      <a href="products.html#tab2">항온항습기</a>
-      <a href="products.html#tab3">제습기</a>
-      <a href="products.html#tab4">제습기유니트</a>
-    </div>
-  </li>
-
-  <li class="has-dropdown">
-    <a href="rnd.html">연구개발</a>
-    <div class="dropdown">
-      <a href="rnd.html#tab1">연구개발 현황</a>
-      <a href="rnd.html#tab2">기술 보유 현황</a>
-    </div>
-  </li>
-
-  <li class="has-dropdown">
-    <a href="support.html">고객센터</a>
-    <div class="dropdown">
-      <a href="support.html#tab1">공지사항</a>
-      <a href="support.html#tab2">온라인 문의</a>
-      <a href="support.html#tab3">제품 카탈로그</a>
-      <a href="support.html#tab4">설치 및 A/S</a>
-    </div>
-  </li>
+<div class="header-inner">
+<a class="brand" href="index.html">
+<img alt="SNT CI 로고" decoding="async" loading="lazy" onerror="this.style.display='none'" src="img/ci_logo.png"/>
+</a>
+<button aria-label="메뉴 열기" class="nav-toggle" type="button">
+<span class="bar"></span><span class="bar"></span><span class="bar"></span>
+</button>
+<nav aria-label="주요 메뉴" class="main-nav">
+<ul class="menu">
+<li class="has-dropdown">
+<a href="about.html">회사소개</a>
+<div class="dropdown">
+<a href="about.html#tab1">인사말</a>
+<a href="about.html#tab2">CI</a>
+<a href="about.html#tab3">조직도</a>
+<a href="about.html#tab4">경영목표</a>
+<a href="about.html#tab5">회사연혁</a>
+<a href="about.html#tab6">특허·인증서</a>
+<a href="about.html#tab7">오시는 길</a>
+</div>
+</li>
+<li class="has-dropdown">
+<a href="products.html">제품소개</a>
+<div class="dropdown">
+<a href="products.html#tab1">공조기</a>
+<a href="products.html#tab2">항온항습기</a>
+<a href="products.html#tab3">제습기</a>
+<a href="products.html#tab4">제습기유니트</a>
+</div>
+</li>
+<li class="has-dropdown">
+<a href="rnd.html">연구개발</a>
+<div class="dropdown">
+<a href="rnd.html#tab1">연구개발 현황</a>
+<a href="rnd.html#tab2">기술 보유 현황</a>
+</div>
+</li>
+<li class="has-dropdown">
+<a href="support.html">고객센터</a>
+<div class="dropdown">
+<a href="support.html#tab1">공지사항</a>
+<a href="support.html#tab2">온라인 문의</a>
+<a href="support.html#tab3">제품 카탈로그</a>
+<a href="support.html#tab4">설치 및 A/S</a>
+</div>
+</li>
 </ul>
-    </nav>
-  </div>
+</nav>
+</div>
 </header>
-
+</div>
 <!-- HERO (KRKOREA 스타일: 큰 타이포 + 슬라이드 텍스트) -->
 <section class="hero" data-hero="slides">
-  <div class="hero-bgs" aria-hidden="true">
-    <div class="hero-bg is-active"></div>
-    <div class="hero-bg"></div>
-  </div>
-  <div class="wrap">
+<div aria-hidden="true" class="hero-bgs">
+<div class="hero-bg is-active"></div>
+<div class="hero-bg"></div>
+</div>
+<div class="wrap">
 <!-- 슬라이드 텍스트 (데이터만 보관, 실제 출력은 JS가 담당) -->
-    <span hidden data-hero-title="공조기술의 완성도를 높입니다"></span>
-    <span hidden data-hero-sub="설계부터 제작·시공까지\n현장 중심의 기술력으로 신뢰를 구축합니다"></span>
-
-    <span hidden data-hero-bg="img/hero_1.jpg"></span>
-
-    <span hidden data-hero-title="보이지 않는 곳에서 완벽함을 만듭니다"></span>
-    <span hidden data-hero-sub="클린룸·항온항습·제습·냉동공조\n정밀 환경을 위한 토탈 솔루션"></span>
-
-    <span hidden data-hero-bg="img/hero_2.jpg"></span>
-
-    <span hidden data-hero-title="기술로 혁신하고, 신뢰로 완성합니다"></span>
-    <span hidden data-hero-sub="품질 기준을 지키는 시공과\n안정적인 유지관리로 고객과 함께합니다"></span>
-
-    <span hidden data-hero-bg="img/hero_3.jpg"></span>
-
-    <div class="hero-content">
-    <h1 class="hero-title"></h1>
-    <p class="hero-sub"></p>
-
-    <div class="hero-dots" aria-label="슬라이드 선택">
-      <button class="hero-dot active" type="button" aria-label="슬라이드 1"></button>
-      <button class="hero-dot" type="button" aria-label="슬라이드 2"></button>
-      <button class="hero-dot" type="button" aria-label="슬라이드 3"></button>
-    </div>
-    </div>
-  </div>
+<span data-hero-title="공조기술의 완성도를 높입니다" hidden=""></span>
+<span data-hero-sub="설계부터 제작·시공까지\n현장 중심의 기술력으로 신뢰를 구축합니다" hidden=""></span>
+<span data-hero-bg="img/hero_1.webp" hidden=""></span>
+<span data-hero-title="보이지 않는 곳에서 완벽함을 만듭니다" hidden=""></span>
+<span data-hero-sub="클린룸·항온항습·제습·냉동공조\n정밀 환경을 위한 토탈 솔루션" hidden=""></span>
+<span data-hero-bg="img/hero_2.webp" hidden=""></span>
+<span data-hero-title="기술로 혁신하고, 신뢰로 완성합니다" hidden=""></span>
+<span data-hero-sub="품질 기준을 지키는 시공과\n안정적인 유지관리로 고객과 함께합니다" hidden=""></span>
+<span data-hero-bg="img/hero_3.webp" hidden=""></span>
+<div class="hero-content">
+<h1 class="hero-title"></h1>
+<p class="hero-sub"></p>
+<div aria-label="슬라이드 선택" class="hero-dots">
+<button aria-label="슬라이드 1" class="hero-dot active" type="button"></button>
+<button aria-label="슬라이드 2" class="hero-dot" type="button"></button>
+<button aria-label="슬라이드 3" class="hero-dot" type="button"></button>
+</div>
+</div>
+</div>
 </section>
-
 <!-- Products -->
 <section class="section section--white">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <div class="kicker">Products</div>
-        <h2 class="h2">주요 제품</h2>
-      </div>
-      <a class="more" href="products.html">More view</a>
-    </div>
+<div class="wrap">
+<div class="section-head">
+<div>
+<div class="kicker">Products</div>
+<h2 class="h2">주요 제품</h2>
+</div>
+<a class="more" href="products.html">More view</a>
+</div>
+<div class="grid product-grid">
+<article class="card">
+<a class="media" href="products.html#tab1"><img alt="공조기" decoding="async" loading="lazy" onerror="this.style.display='none'" src="img/product_ahu.png"/></a>
+<div class="body">
+<h3 class="title">공조기</h3>
+<p class="desc">공정/시설 조건에 맞춘 맞춤형 공기조화 시스템</p>
+<div class="cta"><a class="btn" href="products.html#tab1">자세히</a></div>
+</div>
+</article>
+<article class="card">
+<a class="media" href="products.html#tab2"><img alt="항온항습기" decoding="async" loading="lazy" onerror="this.style.display='none'" src="img/product_thc.webp"/></a>
+<div class="body">
+<h3 class="title">항온항습기</h3>
+<p class="desc">정밀 온도·습도 제어로 안정적인 환경 유지</p>
+<div class="cta"><a class="btn" href="products.html#tab2">자세히</a></div>
+</div>
+</article>
+<article class="card">
+<a class="media" href="products.html#tab3"><img alt="제습기" decoding="async" loading="lazy" onerror="this.style.display='none'" src="img/product_dehumidifier.png"/></a>
+<div class="body">
+<h3 class="title">제습기</h3>
+<p class="desc">저노점 제습으로 공정 품질 안정화 지원</p>
+<div class="cta"><a class="btn" href="products.html#tab3">자세히</a></div>
+</div>
+</article>
+<article class="card">
+<a class="media" href="products.html#tab4"><img alt="제습기유니트" decoding="async" loading="lazy" onerror="this.style.display='none'" src="img/product_thc.webp"/></a>
+<div class="body">
+<h3 class="title">제습기유니트</h3>
+<p class="desc">제습기 유니트/구성품 (내용 변경 예정)</p>
+<div class="cta"><a class="btn" href="products.html#tab4">자세히</a></div>
+</div>
+</article>
+</div>
+</div>
 
-    <div class="grid product-grid">
-      <article class="card">
-        <a class="media" href="products.html#tab1"><img src="img/product_ahu.png" alt="공조기" onerror="this.style.display='none'"></a>
-        <div class="body">
-          <h3 class="title">공조기</h3>
-          <p class="desc">공정/시설 조건에 맞춘 맞춤형 공기조화 시스템</p>
-          <div class="cta"><a class="btn" href="products.html#tab1">자세히</a></div>
-        </div>
-      </article>
-
-      <article class="card">
-        <a class="media" href="products.html#tab2"><img src="img/product_thc.png" alt="항온항습기" onerror="this.style.display='none'"></a>
-        <div class="body">
-          <h3 class="title">항온항습기</h3>
-          <p class="desc">정밀 온도·습도 제어로 안정적인 환경 유지</p>
-          <div class="cta"><a class="btn" href="products.html#tab2">자세히</a></div>
-        </div>
-      </article>
-
-      <article class="card">
-        <a class="media" href="products.html#tab3"><img src="img/product_dehumidifier.png" alt="제습기" onerror="this.style.display='none'"></a>
-        <div class="body">
-          <h3 class="title">제습기</h3>
-          <p class="desc">저노점 제습으로 공정 품질 안정화 지원</p>
-          <div class="cta"><a class="btn" href="products.html#tab3">자세히</a></div>
-        </div>
-      </article>
-
-      <article class="card">
-        <a class="media" href="products.html#tab4"><img src="img/product_cr.png" alt="제습기유니트" onerror="this.style.display='none'"></a>
-        <div class="body">
-          <h3 class="title">제습기유니트</h3>
-          <p class="desc">제습기 유니트/구성품 (내용 변경 예정)</p>
-          <div class="cta"><a class="btn" href="products.html#tab4">자세히</a></div>
-        </div>
-      </article>
-    </div>
-    </div>
-  </div>
 </section>
-
 <!-- Community -->
 <section class="section">
-  <div class="wrap">
-    <div class="community">
-      <div class="contact-box community-box">
-        <div class="kicker">Community</div>
-        <h3 class="h3">Community</h3>
-        <ul id="noticeListIndex" class="notice-list" style="margin-top:12px;"></ul>
-        </div>
+<div class="wrap">
+<div class="community">
+<div class="contact-box community-box">
+<div class="kicker">Community</div>
+<h3 class="h3">Community</h3>
+<ul class="notice-list" id="noticeListIndex" style="margin-top:12px;"></ul>
+</div>
+<div class="contact-box">
+<div class="kicker">Contact</div>
+<div class="contact-big">031-508-0252</div>
+<div class="contact-meta">
+<div><b>Fax</b> 031-508-0255</div>
+<div><b>E-mail</b> sntin2010@naver.com</div>
+<div style="margin-top:8px;"><b>주소</b> 경기도 화성시 마도면 청원산단5길 26</div>
+</div>
+<div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap;">
+<a class="btn" href="support.html#tab2">온라인 문의</a>
+<a class="btn btn-ghost" href="support.html#tab3">카탈로그</a>
+</div>
+</div>
+</div>
+</div>
 
-      <div class="contact-box">
-        <div class="kicker">Contact</div>
-        <div class="contact-big">031-508-0252</div>
-        <div class="contact-meta">
-          <div><b>Fax</b> 031-508-0255</div>
-          <div><b>E-mail</b> sntin2010@naver.com</div>
-          <div style="margin-top:8px;"><b>주소</b> 경기도 화성시 마도면 청원산단5길 26</div>
-        </div>
-        <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap;">
-          <a class="btn" href="support.html#tab2">온라인 문의</a>
-          <a class="btn btn-ghost" href="support.html#tab3">카탈로그</a>
-        </div>
-      </div>
-    </div>
-    </div>
-  </div>
 </section>
-
+<div id="site-footer">
 <footer class="site-footer">
-  <div class="footer-inner">
-    <div class="footer-logo"><img src="img/ci_logo_white.png" alt="SNT 로고" onerror="this.style.display='none'"></div>
-    <div class="footer-text">
-      <div><b>대표</b> : 임은석 &nbsp; | &nbsp; <b>주소</b> : 경기도 화성시 마도면 청원산단5길 26 &nbsp; | &nbsp; <b>사업자등록번호</b> : 134-86-70313</div>
-      <div><b>Tel</b> : 031-508-0252 &nbsp; | &nbsp; <b>Fax</b> : 031-508-0255 &nbsp; | &nbsp; <b>E-mail</b> : sntin2010@naver.com</div>
-      <div>Copyright © SNT Co., Ltd. All rights reserved.</div>
-    </div>
-  </div>
-  <div class="footer-copy"></div>
+<div class="footer-inner">
+<div class="footer-logo"><img alt="SNT 로고" decoding="async" loading="lazy" onerror="this.style.display='none'" src="img/ci_logo_white.png"/></div>
+<div class="footer-text">
+<div><b>대표</b> : 임은석   |   <b>주소</b> : 경기도 화성시 마도면 청원산단5길 26   |   <b>사업자등록번호</b> : 134-86-70313</div>
+<div><b>Tel</b> : 031-508-0252   |   <b>Fax</b> : 031-508-0255   |   <b>E-mail</b> : sntin2010@naver.com</div>
+<div>Copyright © SNT Co., Ltd. All rights reserved.</div>
+</div>
+</div>
+<div class="footer-copy"></div>
 </footer>
-
-<script src="js/notices.js"></script>
-<script src="js/site.js"></script>
+</div>
+<script defer="defer" src="js/notices.js"></script>
+<script defer="defer" src="js/site.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function(){
   loadNotices('noticeListIndex', 3);

@@ -1,6 +1,6 @@
 async function loadNotices(listId, limit){
   try{
-    const res = await fetch('./data/notices.json', {cache:'no-store'});
+    const res = await fetch('./data/notices.json');
     const arr = await res.json();
     const ul = document.getElementById(listId);
     if(!ul) return;
@@ -51,7 +51,7 @@ async function loadNotices(listId, limit){
 /* Support page: board style notice list (static site / no DB) */
 async function loadNoticeBoard(tbodyId, detailWrapId){
   try{
-    const res = await fetch('./data/notices.json', {cache:'no-store'});
+    const res = await fetch('./data/notices.json');
     const arr = await res.json();
     const tbody = document.getElementById(tbodyId);
     if(!tbody) return;

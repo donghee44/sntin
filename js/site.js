@@ -1,9 +1,40 @@
+/* ===== Common header/footer injector (GitHub Pages friendly) =====
+   - Works on GitHub Pages / local server.
+   - If opened via file:// and fetch is blocked, the inline fallback inside
+     #site-header / #site-footer will remain visible.
+*/
+async function injectCommon(){
+  const headerMount = document.getElementById('site-header');
+  const footerMount = document.getElementById('site-footer');
+
+  if (headerMount) {
+    try{
+      const html = await fetch('partials/header.html').then(r => r.text());
+      headerMount.outerHTML = html;
+    }catch(e){
+      // keep fallback
+      console.warn('Header partial load failed, using fallback markup.', e);
+    }
+  }
+
+  if (footerMount) {
+    try{
+      const html = await fetch('partials/footer.html').then(r => r.text());
+      footerMount.outerHTML = html;
+    }catch(e){
+      console.warn('Footer partial load failed, using fallback markup.', e);
+    }
+  }
+}
+
+
 /* site.js (patched)
    - Header scroll + mobile nav
    - Home HERO slider stays as-is (if present)
    - Inner pages: prevent hash (#tabX) from landing deep in content; keep user at tab menu
 */
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+  await injectCommon();
   // Prevent browser restoring a scrolled position (back/forward)
   try { if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; } catch(e) {}
 

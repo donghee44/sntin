@@ -3,7 +3,7 @@
 .hero{
   position:relative;
   min-height:92vh;
-  background:url('../img/hero_1.jpg') center/cover no-repeat;
+  background:url('../img/hero_1.webp') center/cover no-repeat;
   background-color:#0b0c10;
   display:flex;
   align-items:flex-end;

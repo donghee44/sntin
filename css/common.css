@@ -241,7 +241,7 @@ body:not(.has-hero) .menu>li:hover>a{
 .sub-visual{
   position:relative;
   height:320px;
-  background:url('../img/hero_bg.jpg') center/cover no-repeat;
+  background:url('../img/hero_bg.webp') center/cover no-repeat;
   background-color:#111;
 }
 .sub-visual::after{
@@ -262,11 +262,11 @@ body:not(.has-hero) .menu>li:hover>a{
 
 
 /* sub-visual background per page */
-body.page-about .sub-visual{background-image:url('../img/hero_1.jpg');}
-body.page-business .sub-visual{background-image:url('../img/hero_2.jpg');}
-body.page-products .sub-visual{background-image:url('../img/hero_3.jpg');}
-body.page-rnd .sub-visual{background-image:url('../img/hero_bg.jpg');}
-body.page-support .sub-visual{background-image:url('../img/hero_2.jpg');}
+body.page-about .sub-visual{background-image:url('../img/hero_1.webp');}
+body.page-business .sub-visual{background-image:url('../img/hero_2.webp');}
+body.page-products .sub-visual{background-image:url('../img/hero_3.webp');}
+body.page-rnd .sub-visual{background-image:url('../img/hero_bg.webp');}
+body.page-support .sub-visual{background-image:url('../img/hero_2.webp');}
 
 
 /* tabs */
@@ -442,18 +442,15 @@ body.page-support .sub-visual{background-image:url('../img/hero_2.jpg');}
   .cert-grid{ grid-template-columns: 1fr !important; }
 }
 
-/* ===== Dropdown show fix (apply to all menu items) ===== */
-.site-header .main-nav .menu .has-dropdown{ position: relative; }
-.site-header .main-nav .menu .has-dropdown .dropdown{
-  display: block;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(10px);
-  transition: opacity .18s ease, transform .18s ease, visibility .18s ease;
+/* ===== SAFE dropdown one-line fix (no menu font impact) ===== */
+.site-header .dropdown{
+  min-width: 260px;
 }
-.site-header .main-nav .menu .has-dropdown:hover .dropdown,
-.site-header .main-nav .menu .has-dropdown:focus-within .dropdown{
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
+.site-header .dropdown a{
+  white-space: nowrap;
+}
+@media (max-width: 980px){
+  .site-header .dropdown a{
+    font-size: 20px !important;
+  }
 }
