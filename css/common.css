@@ -265,7 +265,7 @@ body:not(.has-hero) .menu>li:hover>a{
 body.page-about .sub-visual{background-image:url('../img/hero_1.webp');}
 body.page-business .sub-visual{background-image:url('../img/hero_2.webp');}
 body.page-products .sub-visual{background-image:url('../img/hero_3.webp');}
-body.page-rnd .sub-visual{background-image:url('../img/hero_bg.webp');}
+body.page-rnd .sub-visual{background-image:url('../img/hero_2.webp');}
 body.page-support .sub-visual{background-image:url('../img/hero_2.webp');}
 
 
@@ -279,6 +279,11 @@ body.page-support .sub-visual{background-image:url('../img/hero_2.webp');}
   color:var(--muted);
   position:relative;
   font-weight:900;
+}
+.tab-menu li:focus-visible{
+  outline:2px solid rgba(20,138,74,.55);
+  outline-offset:4px;
+  border-radius:999px;
 }
 .tab-menu li.active{color:var(--text)}
 .tab-menu li.active::after{
@@ -296,6 +301,24 @@ body.page-support .sub-visual{background-image:url('../img/hero_2.webp');}
 .notice-date{color:var(--muted);min-width:110px;font-weight:900}
 .notice-title{font-weight:900}
 .notice-content{margin-top:8px;color:var(--muted);line-height:1.8;white-space:pre-line}
+
+/* Reduce CLS for product/cert images */
+.product-media img{
+  display:block;
+  width:100%;
+  height:auto;
+  aspect-ratio:4/3;
+  object-fit:contain;
+  background:#f3f4f6;
+}
+.cert-card img{
+  display:block;
+  width:100%;
+  height:auto;
+  aspect-ratio:3/4;
+  object-fit:cover;
+  background:#f3f4f6;
+}
 
 /* footer */
 .site-footer{

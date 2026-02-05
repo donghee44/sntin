@@ -1,6 +1,7 @@
 async function loadNotices(listId, limit){
   try{
     const res = await fetch('./data/notices.json');
+    if (!res.ok) throw new Error('Notices fetch failed: ' + res.status);
     const arr = await res.json();
     const ul = document.getElementById(listId);
     if(!ul) return;
@@ -52,6 +53,7 @@ async function loadNotices(listId, limit){
 async function loadNoticeBoard(tbodyId, detailWrapId){
   try{
     const res = await fetch('./data/notices.json');
+    if (!res.ok) throw new Error('Notices fetch failed: ' + res.status);
     const arr = await res.json();
     const tbody = document.getElementById(tbodyId);
     if(!tbody) return;

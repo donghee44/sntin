@@ -1,7 +1,6 @@
 /* ===== Common header/footer injector (GitHub Pages friendly) =====
    - Works on GitHub Pages / local server.
-   - If opened via file:// and fetch is blocked, the inline fallback inside
-     #site-header / #site-footer will remain visible.
+   - If opened via file:// and fetch is blocked, header/footer will be empty.
 */
 async function injectCommon(){
   const headerMount = document.getElementById('site-header');
@@ -9,7 +8,9 @@ async function injectCommon(){
 
   if (headerMount) {
     try{
-      const html = await fetch('partials/header.html').then(r => r.text());
+      const res = await fetch('partials/header.html');
+      if (!res.ok) throw new Error('Header fetch failed: ' + res.status);
+      const html = await res.text();
       headerMount.outerHTML = html;
     }catch(e){
       // keep fallback
@@ -19,7 +20,9 @@ async function injectCommon(){
 
   if (footerMount) {
     try{
-      const html = await fetch('partials/footer.html').then(r => r.text());
+      const res = await fetch('partials/footer.html');
+      if (!res.ok) throw new Error('Footer fetch failed: ' + res.status);
+      const html = await res.text();
       footerMount.outerHTML = html;
     }catch(e){
       console.warn('Footer partial load failed, using fallback markup.', e);
@@ -53,8 +56,21 @@ document.addEventListener('DOMContentLoaded', async () => {
   const navToggle = document.querySelector('.nav-toggle');
   const mainNav = document.querySelector('.main-nav');
   if (navToggle && mainNav) {
-    navToggle.addEventListener('click', () => document.body.classList.toggle('nav-open'));
-    mainNav.addEventListener('click', (e) => { if (e.target === mainNav) document.body.classList.remove('nav-open'); });
+    const navId = mainNav.id || 'main-nav';
+    mainNav.id = navId;
+    navToggle.setAttribute('aria-controls', navId);
+    navToggle.setAttribute('aria-expanded', 'false');
+
+    navToggle.addEventListener('click', () => {
+      const open = document.body.classList.toggle('nav-open');
+      navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    mainNav.addEventListener('click', (e) => {
+      if (e.target === mainNav) {
+        document.body.classList.remove('nav-open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
   }
 
   // === Home HERO slider (existing structure) ===
